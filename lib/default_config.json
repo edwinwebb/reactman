@@ -1,4 +1,4 @@
-module.exports = {
+{
   "templatesFolder" : "./template/",
   "testsFolder" : "./app/__tests__/",
   "outputFolder" : "./app/components/",
