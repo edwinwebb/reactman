@@ -1,5 +1,5 @@
-import React from react;
-import styles from './{{exports}}.css';
+import React from "react";
+import styles from "./{{exports}}.css";
 
 /**
  * {{description}}

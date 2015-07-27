@@ -1,12 +1,12 @@
 {
-  "templatesFolder" : "./template/",
+  "templatesFolder" : "./templates/",
   "testsFolder" : "./app/__tests__/",
   "outputFolder" : "./app/components/",
   "templates" : {
     "component" : {
-      "src" : "component.jsx",
-      "test" : "component-test.js",
-      "style" : "component.css",
+      "src" : "template.jsx",
+      "test" : "template-test.js",
+      "style" : "template.css",
       "include" : {
         "react" : "React",
         "cx" : "ClassNames"
