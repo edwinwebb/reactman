@@ -1,0 +1,23 @@
+module.exports = {
+  "templatesFolder" : "./template/",
+  "testsFolder" : "./app/__tests__/",
+  "outputFolder" : "./app/components/",
+  "templates" : {
+    "component" : {
+      "src" : "component.jsx",
+      "test" : "component-test.js",
+      "style" : "component.css",
+      "include" : {
+        "react" : "React",
+        "cx" : "ClassNames"
+      }
+    }
+  },
+  "defaultIncludes" : {
+    "react" : "React"
+  },
+  "optionalIncludes" : {
+    "ClassNames" : "cx"
+  },
+  "issue_tracker" : "https://github.com/edwinwebb/reactman/issues"
+}
