@@ -16,8 +16,6 @@ module.exports = {
   "defaultIncludes" : {
     "react" : "React"
   },
-  "optionalIncludes" : {
-    "ClassNames" : "cx"
-  },
+  "optionalIncludes" : {},
   "issue_tracker" : "https://github.com/edwinwebb/reactman/issues"
 }
