@@ -1,0 +1,13 @@
+{
+  "templatesFolder" : "./templates/",
+  "testsFolder" : "./app/__tests__/",
+  "outputFolder" : "./app/components/",
+  "templates" : {
+    "component" : {
+      "src" : "template.jsx",
+      "test" : "template-test.js",
+      "style" : "template.css"
+    }
+  },
+  "issue_tracker" : "https://github.com/edwinwebb/reactman/issues/"
+}

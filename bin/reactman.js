@@ -132,7 +132,7 @@ if(args.config) {
 if(configLocation) {
   config = require(configLocation);
 } else {
-  config = require("../default_config.json");
+  writeError('Please supply a config file.');
 }
 
 // START IO
