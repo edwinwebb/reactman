@@ -2,7 +2,8 @@ REACTMAN
 ========
 Large teams codebases should look like a single person wrote them. Reactman is
 here to help and up your productivity. Reactman is a simple little fella who
-will take templates for your react components then move them about.
+will take templates for your react components, populate them via the command
+line then move them into your codebase.
 
 Reactman away!
 
@@ -19,7 +20,8 @@ Then add this line to your NPM scripts
 "reactman" : "reactman --config path-to-config.json"
 `
 
-Finally type at your prompt to create a new component from your templates
+Make a config file from the example below. Then finally type at your prompt to
+create a new component from your templates
 
 `
 npm run reactman
