@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./{{exports}}.css";
+import styles from "./{{exportsLowerCase}}.css";
 
 /**
  * {{description}}
  *
  * @exports {{exports}}
  * @extends {{extends}}
- * @see {{issue-link}}
+ * @see {{ticketLink}}
  */
 export default class {{exports}} extends {{extends}} {
 

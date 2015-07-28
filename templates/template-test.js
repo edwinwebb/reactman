@@ -1,13 +1,21 @@
 /*eslint-env node, mocha */
 
+/**
+ * Component Test for {{exports}}
+ *
+ * {{description}}
+ *
+ * @see {{ticketLink}}
+ */
+
 import React from 'react';
 import TestUtils from 'react/lib/ReactTestUtils';
 import expect from 'expect';
-import {{exports}} from '../components/{{exports}}/{{exports}}.jsx';
+import {{exports}} from '../components/{{exportsLowerCase}}/{{exportsLowerCase}}.jsx';
 
 describe('root', () => {
   it('{{exports}} renders without problems', () => {
-    const sidebar = TestUtils.renderIntoDocument(<{{exports}} />);
-    expect({{exports}}).toExist();
+    const {{exportsLowerCase}} = TestUtils.renderIntoDocument(<{{exports}} />);
+    expect({{exportsLowerCase}}).toExist();
   });
 });
