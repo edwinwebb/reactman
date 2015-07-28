@@ -1,7 +1,7 @@
 {
-  "templatesFolder" : "../test/templates/",
-  "testsFolder" : "../test/output/tests/",
-  "outputFolder" : "../test/output/components/",
+  "templatesFolder" : "./test/templates/",
+  "testsFolder" : "./test/output/tests/",
+  "outputFolder" : "./test/output/components/",
   "templates" : {
     "component" : {
       "src" : "template.jsx",

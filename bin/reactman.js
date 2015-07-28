@@ -75,7 +75,7 @@ function renderToString(source, data) {
 function makeFolder(dir) {
   var parent = config.outputFolder;
   var child = dir;
-  var folder = path.resolve(__dirname, parent + child);
+  var folder = path.resolve(process.cwd(), parent + child);
 
   console.log(folder);
 
@@ -99,8 +99,8 @@ function makeFolder(dir) {
 function writeTemplate(source, results, outputFolder) {
 
   var ext = path.extname(source); // file extension
-  var output = path.resolve(__dirname, outputFolder + ext);  // output and extension
-  var input = path.resolve(__dirname, source); // template file
+  var output = path.resolve(process.cwd(), outputFolder + ext);  // output and extension
+  var input = path.resolve(process.cwd(), source); // template file
 
   console.log(input);
 
@@ -129,7 +129,7 @@ function writeTemplate(source, results, outputFolder) {
 
 // set config
 if(args.config) {
-  config = require(path.resolve(__dirname, args.config));
+  config = require(path.resolve(process.cwd(), args.config));
 } else {
   writeError("Please supply a config file.");
 }

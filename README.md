@@ -20,8 +20,11 @@ Then add this line to your NPM scripts
 "reactman" : "reactman --config path-to-config.json"
 `
 
-Make a config file from the example below. Then finally type at your prompt to
-create a new component from your templates
+Make a config file from the example below. You will also need some templates.
+For the time being Reactman is inflexible : he needs the three templates in
+defined in the config. You can grab the example templates from ./test/templates
+
+Then finally type at your prompt to create a new component from your templates
 
 `
 npm run reactman
