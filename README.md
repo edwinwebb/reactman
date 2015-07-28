@@ -25,8 +25,22 @@ CONFIG
 By default Reactman will use the default settings. You can configure Reactman
 with a configuration file specified at the CLI.
 
+Current config isn't great.
+
+TEMPLATES
+------
+Current template vars are: 
+
+* exports
+* exportsLowerCase
+* extends
+* ticketLink
+* ticket
+* description
+
 ROADMAP
 -------
-V1 - Useable for React Views
-V2 - Flux/Reflux Templating
-V3 - Better workflows and examples
+* V1 - Useable for React Components
+* V2 - Flux/Reflux Templating & better config
+* V3 - Custom Scripts
+* V4 - Better workflows and examples

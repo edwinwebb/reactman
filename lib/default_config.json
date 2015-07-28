@@ -6,16 +6,8 @@
     "component" : {
       "src" : "template.jsx",
       "test" : "template-test.js",
-      "style" : "template.css",
-      "include" : {
-        "react" : "React",
-        "cx" : "ClassNames"
-      }
+      "style" : "template.css"
     }
   },
-  "defaultIncludes" : {
-    "react" : "React"
-  },
-  "optionalIncludes" : {},
   "issue_tracker" : "https://github.com/edwinwebb/reactman/issues/"
 }

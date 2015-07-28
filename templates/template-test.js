@@ -1,4 +1,4 @@
-/*eslint-env node, mocha */
+/*eslint-env mocha */
 
 /**
  * Component Test for {{exports}}
