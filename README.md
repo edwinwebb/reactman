@@ -8,13 +8,18 @@ Reactman away!
 
 USE
 ---
-Add this line to your NPM scripts
+
+Install via NPM
+
+`npm install reactman`
+
+Then add this line to your NPM scripts
 
 `
-"reactman" : "reactman"
+"reactman" : "reactman --config path-to-config.json"
 `
 
-then type at your prompt
+Finally type at your prompt to create a new component from your templates
 
 `
 npm run reactman
@@ -22,14 +27,28 @@ npm run reactman
 
 CONFIG
 ------
-By default Reactman will use the default settings. You can configure Reactman
-with a configuration file specified at the CLI.
+Reactman needs a configuration to run. You configure Reactman
+with a configuration file specified at the CLI. Here's an example
 
-Current config isn't great.
+`
+{
+  "templatesFolder" : "./templates/",
+  "testsFolder" : "./app/__tests__/",
+  "outputFolder" : "./app/components/",
+  "templates" : {
+    "component" : {
+      "src" : "template.jsx",
+      "test" : "template-test.js",
+      "style" : "template.css"
+    }
+  },
+  "issue_tracker" : "https://github.com/edwinwebb/reactman/issues/"
+}
+`
 
 TEMPLATES
 ------
-Current template vars are: 
+Current template vars are:
 
 * exports
 * exportsLowerCase
