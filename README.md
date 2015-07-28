@@ -21,16 +21,16 @@ Then add this line to your NPM scripts
 
 Finally type at your prompt to create a new component from your templates
 
-```json
+`
 npm run reactman
-```
+`
 
 CONFIG
 ------
 Reactman needs a configuration to run. You configure Reactman
 with a configuration file specified at the CLI. Here's an example
 
-`
+```json
 {
   "templatesFolder" : "./templates/",
   "testsFolder" : "./app/__tests__/",
@@ -44,7 +44,7 @@ with a configuration file specified at the CLI. Here's an example
   },
   "issue_tracker" : "https://github.com/edwinwebb/reactman/issues/"
 }
-`
+```
 
 TEMPLATES
 ------
