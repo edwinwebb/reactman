@@ -108,9 +108,14 @@ function writeTemplate(source, results, outputFolder) {
       // call the render function
       var content = renderToString(fileString, results);
       // write
-      fs.writeFileSync(output, content);
-      // log success
-      process.stdout.write(chalk.green("Wrote: " + output + "\n"));
+      fs.writeFile(output, content, function(err) {
+        if(!err) {
+          process.stdout.write(chalk.green("Wrote: " + output + "\n"));
+        } else {
+          writeError("File write error");
+        }
+      });
+
     } else {
       writeError("File read error");
     }
@@ -127,7 +132,7 @@ if(args.config) {
 if(configLocation) {
   config = require(configLocation);
 } else {
-  config = require("./default_config.json");
+  config = require("../default_config.json");
 }
 
 // START IO

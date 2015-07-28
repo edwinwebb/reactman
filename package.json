@@ -5,7 +5,7 @@
   "main": "./bin/reactman.js",
   "scripts": {
     "test": "npm test",
-    "start": "rimraf ./app/components/exports && node ./lib/reactman.js",
+    "start": "rimraf ./app/components/exports && node ./bin/reactman.js",
     "lint": "eslint ./"
   },
   "repository": {
