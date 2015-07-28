@@ -15,7 +15,6 @@ var minimist = require("minimist");
 var prompt = require("prompt");
 var chalk = require("chalk");
 var args = minimist(process.argv.slice(2));
-var configLocation = false;
 var config;
 
 // Prompt Script
@@ -76,13 +75,16 @@ function renderToString(source, data) {
 function makeFolder(dir) {
   var parent = config.outputFolder;
   var child = dir;
-  var folder = parent + child;
+  var folder = path.resolve(__dirname, parent + child);
+
+  console.log(folder);
 
   // Is it a directory?
-  fs.mkdirSync(folder, function(err) {
+  fs.mkdir(folder, function(err) {
     if (err && err.code === "EEXIST") {
       writeError("Directory exists, exiting...");
     } else if(err) {
+      console.log(err);
       writeError("Check config outputFolder: " + config.outputFolder);
     } else {
       // successfully created folder
@@ -97,8 +99,10 @@ function makeFolder(dir) {
 function writeTemplate(source, results, outputFolder) {
 
   var ext = path.extname(source); // file extension
-  var output = path.normalize(outputFolder + ext);  // output and extension
-  var input = path.normalize(source); // template file
+  var output = path.resolve(__dirname, outputFolder + ext);  // output and extension
+  var input = path.resolve(__dirname, source); // template file
+
+  console.log(input);
 
   // read
   fs.readFile(input, function(err, data){
@@ -108,8 +112,8 @@ function writeTemplate(source, results, outputFolder) {
       // call the render function
       var content = renderToString(fileString, results);
       // write
-      fs.writeFile(output, content, function(err) {
-        if(!err) {
+      fs.writeFile(output, content, function(werr) {
+        if(!werr) {
           process.stdout.write(chalk.green("Wrote: " + output + "\n"));
         } else {
           writeError("File write error");
@@ -117,22 +121,17 @@ function writeTemplate(source, results, outputFolder) {
       });
 
     } else {
+      console.log(err);
       writeError("File read error");
     }
   });
 }
 
-// scrape for config
-// @todo - work out how to do this properly
-if(args.config) {
-  configLocation = args.config;
-}
-
 // set config
-if(configLocation) {
-  config = require(configLocation);
+if(args.config) {
+  config = require(path.resolve(__dirname, args.config));
 } else {
-  writeError('Please supply a config file.');
+  writeError("Please supply a config file.");
 }
 
 // START IO

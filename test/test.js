@@ -1,16 +1,25 @@
 var assert = require("assert");
+var fs = require("fs");
+var path = require("path");
 
-describe('Sanity', function() {
-  describe('Tests Run', function () {
-    it('should pass easily', function () {
-      assert.equal(true, 1 === 1);
-    });
+describe('Tests Run', function () {
+  it('Success', function () {
+    assert.equal(true, 1 === 1);
   });
 });
 
 describe('Reactman', function() {
-  describe('Tests Run', function () {
-    it('should pass easily', function () {
+  describe('it should output thee files', function () {
+    it('JSX', function () {
+      fs.readFileSync(path.resolve(__dirname,'./output/components/exports/exports.jsx'));
+      assert.equal(true, 1 === 1);
+    });
+    it('CSS', function () {
+      fs.readFileSync(path.resolve(__dirname,'./output/components/exports/exports.css'));
+      assert.equal(true, 1 === 1);
+    });
+    it('Test', function () {
+      fs.readFileSync(path.resolve(__dirname,'./output/tests/exports.js'));
       assert.equal(true, 1 === 1);
     });
   });
