@@ -21,9 +21,9 @@ Then add this line to your NPM scripts
 
 Finally type at your prompt to create a new component from your templates
 
-`
+```json
 npm run reactman
-`
+```
 
 CONFIG
 ------
