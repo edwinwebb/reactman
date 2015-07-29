@@ -1,3 +1,9 @@
+/**
+ * Basic tests for Reactman
+ *
+ * Just hit enter on each prompt to have the tests (hopefully) pass
+ */
+
 var assert = require("assert");
 var fs = require("fs");
 var path = require("path");
@@ -9,7 +15,7 @@ describe('Tests Run', function () {
 });
 
 describe('Reactman', function() {
-  describe('it should output thee files', function () {
+  describe('it should output three files', function () {
     it('JSX', function () {
       fs.readFileSync(path.resolve(__dirname,'./output/components/exports/exports.jsx'));
       assert.equal(true, 1 === 1);

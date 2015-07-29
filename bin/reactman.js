@@ -21,12 +21,9 @@ var baseScript = [{
   "name": "script",
   "description": "Choose a Script from your config.",
   "required": true,
-  "default": "component",
   "type": "string"
 }];
 var config;
-//var script;
-var currentData;
 
 /**
  * STOUT an Error Message
@@ -135,10 +132,11 @@ function runScript(data) {
       if (files.hasOwnProperty(file)) {
 
         // if the value has a handlebars string then make that folder
-        if(files[file].indexOf('{{') > -1) {
+        if(files[file].indexOf("{{") > -1) {
           makeFolder(config.outputFolder + renderToString(files[file], result));
         }
 
+        // write the template to the filesystem
         writeTemplate(
           config.templatesFolder + file,
           result,
@@ -161,13 +159,18 @@ if(!config.scripts) {
   writeError("Please supply a set of scripts.");
 }
 
+// set default script for first prompt
+if(config.default_script) {
+  baseScript[0].default = config.default_script;
+}
+
 // START IO
 process.stdout.write(chalk.blue("Reactman Away!\n"));
-process.stdout.write(chalk.blue("Template a new file\n"));
-process.stdout.write(chalk.blue("-------------------\n"));
+process.stdout.write(chalk.blue("--------------\n"));
 
-prompt.message = "Component".blue;
-prompt.delimiter = ":".green;
+// Start Prompt
+prompt.message = "Reactman".green;
+prompt.delimiter = " : ".green;
 prompt.start();
 
 // Prompt for script to run§
@@ -177,6 +180,11 @@ prompt.get(baseScript, function (err, result) {
     writeError("Prompt error");
   }
 
-  runScript(config.scripts[result.script]);
+  // check and then run script
+  if(config.scripts[result.script]) {
+    runScript(config.scripts[result.script]);
+  } else {
+    writeError("Script " + result.script + " not found in config. Exiting.");
+  }
 
 });

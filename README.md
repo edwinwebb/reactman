@@ -35,13 +35,15 @@ CONFIG
 ------
 Reactman needs a configuration to run. Optional keys are marked with a *
 
-* templatesFolder defines where Reactman will look for templates
-* outputFolder is prepended to each file write
-* issueTracker* is prepended to any `ticket` result
-* scripts defines the templating process
-* * Key : Type this at the first prompt to init the script, component in this
+See the working example in `./test/` for more information
+
+* `templatesFolder` defines where Reactman will look for templates
+* `outputFolder` is prepended to each file write
+* `issueTracker`* is prepended to any `ticket` result
+* `scripts` defines the templating process
+* * key : Type this at the first prompt to init the script, component in this
 example
-* * files : The files to load for templating
+* * `files` : The files to load for templating
 * * * key : the template to load
 * * * value : The output directory, also passed the results from the script for
 templating. If it has a handlebars expression Reactman will attempt to make this
@@ -96,8 +98,8 @@ Example config (used in the Reactman tests)
 
 TEMPLATES
 ------
-Current template vars are defined in the script in your config file. Each value
-is also converted to lowerCase.
+Template variables are defined in the `scripts` in your config file. Each value
+is also converted to LowerCase.
 
 eg : exports => exportsLowerCase
 
@@ -105,6 +107,7 @@ ROADMAP
 -------
 * [DONE] Useable for React Components
 * [SKIPPED] Flux/Reflux Templating & better config
-* [CURRENT] - Custom Scripts
+* [CURRENT] Custom Scripts
+* General improvements to scripts and configs
 * Better workflows and examples
 * Better testing, break out code to modules

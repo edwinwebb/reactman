@@ -10,7 +10,7 @@
     "reactmantest": "node ./bin/reactman.js --config ./test/test_config.json",
     "pretest": "rimraf ./test/output/components && mkdir ./test/output/components && rimraf ./test/output/tests && mkdir ./test/output/tests",
     "test": "npm run reactmantest && mocha",
-    "lint": "eslint ./ && npm test"
+    "lint": "eslint ./bin/"
   },
   "repository": {
     "type": "git",
