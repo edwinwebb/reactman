@@ -1,4 +1,4 @@
-REACTMAN CODE GENERATION
+REACTMAN
 ========
 Large teams codebases should look like a single person wrote them. Reactman is
 here to help and up your productivity. Reactman is a code generation tool which
@@ -12,7 +12,7 @@ USE
 
 Install via NPM
 
-`npm install reactman`
+`npm install --save-dev reactman`
 
 Then add this line to your NPM scripts
 
@@ -28,6 +28,8 @@ Then finally type at your prompt to create a new component from your templates
 `
 npm run reactman
 `
+
+The first prompt will ask for the key in the scripts part of the config.
 
 CONFIG
 ------
@@ -46,6 +48,8 @@ templating. If it has a handlebars expression Reactman will attempt to make this
 directory.
 * * script : An array of prompts. See https://github.com/flatiron/prompt for
 more information.
+
+Example config (used in the Reactman tests)
 
 ```json
 {
