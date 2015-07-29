@@ -1,14 +1,14 @@
 {
   "name": "reactman",
-  "version": "1.0.0",
-  "description": "A workflow templating engine for React & Friends",
+  "version": "2.0.0",
+  "description": "A CLI code generation tool for React & Friends",
   "main": "./bin/reactman.js",
-  "bin" : {
-    "reactman" : "./bin/reactman.js"
+  "bin": {
+    "reactman": "./bin/reactman.js"
   },
   "scripts": {
-    "reactmantest" : "node ./bin/reactman.js --config ./test/test_config.json",
-    "pretest" : "mkdir ./test/output && rimraf ./test/output/components && mkdir ./test/output/components && rimraf ./test/output/tests && mkdir ./test/output/tests",
+    "reactmantest": "node ./bin/reactman.js --config ./test/test_config.json",
+    "pretest": "rimraf ./test/output/components && mkdir ./test/output/components && rimraf ./test/output/tests && mkdir ./test/output/tests",
     "test": "npm run reactmantest && mocha",
     "lint": "eslint ./ && npm test"
   },
@@ -35,6 +35,7 @@
     "prompt": "^0.2.14"
   },
   "devDependencies": {
+    "eslint": "^0.24.1",
     "mocha": "^2.2.5",
     "rimraf": "^2.4.2"
   }

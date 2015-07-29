@@ -15,35 +15,16 @@ var minimist = require("minimist");
 var prompt = require("prompt");
 var chalk = require("chalk");
 var args = minimist(process.argv.slice(2));
+var baseScript = [{
+  "name": "script",
+  "description": "Choose a Script from your config.",
+  "required": true,
+  "default": "component",
+  "type": "string"
+}];
 var config;
-
-// Prompt Script
-var script = [{
-      name: "exports",
-      description: "Exports",
-      required: true,
-      default: "Exports",
-      type: "string"
-    }, {
-      name: "extends",
-      description: "Extends",
-      default: "Extends",
-      required: true,
-      type: "string"
-    }, {
-      name: "description",
-      description: "Description",
-      default: "A react component",
-      required: true,
-      type: "string"
-    }, {
-      name: "ticket",
-      description: "Tracking ID",
-      default: "JIRA-####",
-      required: false,
-      type: "string"
-    }
-];
+//var script;
+var currentData;
 
 /**
  * STOUT an Error Message
@@ -73,18 +54,14 @@ function renderToString(source, data) {
  * Make the component directory
  */
 function makeFolder(dir) {
-  var parent = config.outputFolder;
-  var child = dir;
-  var folder = path.resolve(process.cwd(), parent + child);
 
-  console.log(folder);
+  var folder = path.resolve(process.cwd(), dir);
 
-  // Is it a directory?
+  // Make the folder, warn if exisits, log if made
   fs.mkdir(folder, function(err) {
     if (err && err.code === "EEXIST") {
-      writeError("Directory exists, exiting...");
+      process.stdout.write(chalk.yellow("Directory exists: " + dir + "\n"));
     } else if(err) {
-      console.log(err);
       writeError("Check config outputFolder: " + config.outputFolder);
     } else {
       // successfully created folder
@@ -101,8 +78,6 @@ function writeTemplate(source, results, outputFolder) {
   var ext = path.extname(source); // file extension
   var output = path.resolve(process.cwd(), outputFolder + ext);  // output and extension
   var input = path.resolve(process.cwd(), source); // template file
-
-  console.log(input);
 
   // read
   fs.readFile(input, function(err, data){
@@ -121,8 +96,53 @@ function writeTemplate(source, results, outputFolder) {
       });
 
     } else {
-      console.log(err);
-      writeError("File read error");
+      writeError("File read error :" + input);
+    }
+  });
+}
+
+/**
+ * Run the chosen script
+ */
+function runScript(data) {
+
+  var script = data.script;
+  var files = data.files;
+
+  // Run chosen script
+  prompt.get(script, function (err, result) {
+
+    if(err) {
+      writeError("Prompt error: " + err);
+    }
+
+    // loop results and make each value lowerCase
+    for(var res in result) {
+      if (result.hasOwnProperty(res)) {
+        result[res + "LowerCase"] = result[res].toLowerCase();
+      }
+    }
+
+    // merge ticket numbers and url if defined
+    if(result.ticket) {
+      result.ticketLink = config.issue_tracker + result.ticket;
+    }
+
+    // Loop over files, create folders if templated and write out output
+    for (var file in files) {
+      if (files.hasOwnProperty(file)) {
+
+        // if the value has a handlebars string then make that folder
+        if(files[file].indexOf('{{') > -1) {
+          makeFolder(config.outputFolder + renderToString(files[file], result));
+        }
+
+        writeTemplate(
+          config.templatesFolder + file,
+          result,
+          config.outputFolder + renderToString(files[file], result) + "/" + result.exportsLowerCase
+        );
+      }
     }
   });
 }
@@ -134,32 +154,27 @@ if(args.config) {
   writeError("Please supply a config file.");
 }
 
+// set script
+if(!config.scripts) {
+  writeError("Please supply a set of scripts.");
+}
+
 // START IO
 process.stdout.write(chalk.blue("Reactman Away!\n"));
-process.stdout.write(chalk.blue("Template a new react component\n"));
-process.stdout.write(chalk.blue("------------------------------\n"));
+process.stdout.write(chalk.blue("Template a new file\n"));
+process.stdout.write(chalk.blue("-------------------\n"));
 
 prompt.message = "Component".blue;
 prompt.delimiter = ":".green;
 prompt.start();
 
-// Run script
-prompt.get(script, function (err, result) {
+// Prompt for script to run§
+prompt.get(baseScript, function (err, result) {
 
   if(err) {
     writeError("Prompt error");
   }
 
-  // transform script results
-  result.exportsLowerCase = result.exports.toLowerCase();
-  result.ticketLink = config.issue_tracker + result.ticket;
-
-  // Check folder is good and create
-  makeFolder(result.exportsLowerCase);
-
-  // Just for components at the moment
-  writeTemplate(config.templatesFolder + config.templates.component.src, result, config.outputFolder + result.exportsLowerCase + "/" + result.exportsLowerCase);
-  writeTemplate(config.templatesFolder + config.templates.component.style, result, config.outputFolder + result.exportsLowerCase + "/" + result.exportsLowerCase);
-  writeTemplate(config.templatesFolder + config.templates.component.test, result, config.testsFolder + result.exportsLowerCase);
+  runScript(config.scripts[result.script]);
 
 });

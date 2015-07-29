@@ -1,13 +1,39 @@
 {
   "templatesFolder" : "./test/templates/",
-  "testsFolder" : "./test/output/tests/",
-  "outputFolder" : "./test/output/components/",
-  "templates" : {
+  "outputFolder" : "./test/output/",
+  "issue_tracker" : "https://github.com/edwinwebb/reactman/issues/",
+  "scripts" : {
     "component" : {
-      "src" : "template.jsx",
-      "test" : "template-test.js",
-      "style" : "template.css"
+      "files" : {
+        "template.jsx" : "components/{{exportsLowerCase}}/",
+        "template.css" : "components/{{exportsLowerCase}}/",
+        "template-test.js" : "tests/"
+      },
+      "script" : [{
+        "name": "exports",
+        "description": "Exports",
+        "required": true,
+        "default": "Exports",
+        "type": "string"
+      }, {
+        "name": "extends",
+        "description": "Extends",
+        "default": "Extends",
+        "required": true,
+        "type": "string"
+      }, {
+        "name": "description",
+        "description": "Description",
+        "default": "A react component",
+        "required": true,
+        "type": "string"
+      }, {
+        "name": "ticket",
+        "description": "Tracking ID",
+        "default": "JIRA-####",
+        "required": false,
+        "type": "string"
+      }]
     }
-  },
-  "issue_tracker" : "https://github.com/edwinwebb/reactman/issues/"
+  }
 }
