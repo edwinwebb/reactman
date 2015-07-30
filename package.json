@@ -1,7 +1,7 @@
 {
   "name": "reactman",
   "version": "2.0.2",
-  "description": "A CLI code generation tool for React & Friends",
+  "description": "Reactman is a CLI code generation tool which will take templates and populate them via the command line prompt script and then move them into your codebase.",
   "main": "./bin/reactman.js",
   "bin": {
     "reactman": "./bin/reactman.js"
@@ -17,6 +17,8 @@
     "url": "https://github.com/edwinwebb/reactman"
   },
   "keywords": [
+    "code generation",
+    "tool",
     "templating",
     "workflow",
     "build",
