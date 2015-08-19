@@ -12,6 +12,11 @@ command line with NPM scripts.
 
 Reactman away!
 
+RECENT UPDATES
+--------------
+File names are now templateable. eg 
+`"template.jsx" : "components/{{exportsLowerCase}}/{{exports}}{{ext}}"`
+
 EXAMPLE
 -------
 
