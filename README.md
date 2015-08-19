@@ -41,6 +41,7 @@ See the working example in `./test/` for more information
 * `outputFolder` is prepended to each file write
 * `issueTracker`* is prepended to any `ticket` result
 * `scripts` defines the templating process
+* `default_script` is the default for the first reactman prompt
 * * key : Type this at the first prompt to init the script, component in this
 example
 * * `files` : The files to load for templating
