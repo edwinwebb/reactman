@@ -34,7 +34,8 @@
     "chalk": "^1.1.0",
     "handlebars": "^3.0.3",
     "minimist": "^1.1.2",
-    "prompt": "^0.2.14"
+    "prompt": "^0.2.14",
+    "slug": "^0.9.1"
   },
   "devDependencies": {
     "eslint": "^0.24.1",

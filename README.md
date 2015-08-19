@@ -8,7 +8,7 @@ Reactman's mission is to increase productivity and have your teams codebase
 look like it was authored by one heroic developer.
 
 Reactman works alone, he doesn't need a global install and works on the
-command line with NPM scripts. 
+command line with NPM scripts.
 
 Reactman away!
 
@@ -168,9 +168,10 @@ Example config (used in the Reactman tests)
 TEMPLATES
 ------
 Template variables are defined in the `scripts` in your config file. Each value
-is also converted to LowerCase.
+is also converted to LowerCase and it's slug.
 
 eg : exports => exportsLowerCase
+eg : exports => exportsSlug
 
 ROADMAP
 -------

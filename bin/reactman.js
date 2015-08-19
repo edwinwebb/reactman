@@ -16,6 +16,7 @@ var path = require("path");
 var minimist = require("minimist");
 var prompt = require("prompt");
 var chalk = require("chalk");
+var slug = require("slug");
 var args = minimist(process.argv.slice(2));
 var baseScript = [{
   "name": "script",
@@ -119,6 +120,7 @@ function runScript(data) {
     for(var res in result) {
       if (result.hasOwnProperty(res)) {
         result[res + "LowerCase"] = result[res].toLowerCase();
+        result[res + "Slug"] = slug(result[res]);
       }
     }
 
