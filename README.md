@@ -116,7 +116,7 @@ example
 * * * key : the template to load
 * * * value : The output directory, also passed the results from the script for
 templating. If it has a handlebars expression Reactman will attempt to make this
-directory.
+directory. The {{ext}} key is populated from the source file extension.
 * * script : An array of prompts. See https://github.com/flatiron/prompt for
 more information.
 
@@ -130,9 +130,9 @@ Example config (used in the Reactman tests)
   "scripts" : {
     "component" : {
       "files" : {
-        "template.jsx" : "components/{{exportsLowerCase}}/",
-        "template.css" : "components/{{exportsLowerCase}}/",
-        "template-test.js" : "tests/"
+        "template.jsx" : "components/{{exportsLowerCase}}/{{exports}}{{ext}}",
+        "template.css" : "components/{{exportsLowerCase}}/{{exports}}{{ext}}",
+        "template-test.js" : "tests/{{exportsLowerCase}}-test.custom"
       },
       "script" : [{
         "name": "exports",

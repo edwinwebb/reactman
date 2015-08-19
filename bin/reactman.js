@@ -73,10 +73,9 @@ function makeFolder(dir) {
 /**
  * Write and populate a template to destination
  */
-function writeTemplate(source, results, outputFolder) {
+function writeTemplate(source, results, outputFolder, outputFile) {
 
-  var ext = path.extname(source); // file extension
-  var output = path.resolve(process.cwd(), outputFolder + ext);  // output and extension
+  var output = path.resolve(process.cwd(), outputFolder + outputFile);  // output folder and file
   var input = path.resolve(process.cwd(), source); // template file
 
   // read
@@ -112,6 +111,10 @@ function runScript(data) {
   // Run chosen script
   prompt.get(script, function (err, result) {
 
+    var fileFolderExp = new RegExp('^(.*/)([^/]*)$');
+    var folder;
+    var fileName;
+
     if(err) {
       writeError("Prompt error: " + err);
     }
@@ -133,16 +136,22 @@ function runScript(data) {
     for (var file in files) {
       if (files.hasOwnProperty(file)) {
 
+        // extract folder and filename
+        folder = fileFolderExp.exec(files[file])[1];
+        fileName = fileFolderExp.exec(files[file])[2];
+        result.ext = path.extname(file); // file extension
+
         // if the value has a handlebars string then make that folder
-        if(files[file].indexOf("{{") > -1) {
-          makeFolder(config.outputFolder + renderToString(files[file], result));
+        if(folder.indexOf("{{") > -1) {
+          makeFolder(config.outputFolder + renderToString(folder, result));
         }
 
         // write the template to the filesystem
         writeTemplate(
           config.templatesFolder + file,
           result,
-          config.outputFolder + renderToString(files[file], result) + "/" + result.exportsLowerCase
+          config.outputFolder + renderToString(folder, result),
+          renderToString(fileName, result)
         );
       }
     }

@@ -6,9 +6,9 @@
   "scripts" : {
     "component" : {
       "files" : {
-        "template.jsx" : "components/{{exportsLowerCase}}/",
-        "template.css" : "components/{{exportsLowerCase}}/",
-        "template-test.js" : "tests/"
+        "template.jsx" : "components/{{exportsLowerCase}}/{{exports}}{{ext}}",
+        "template.css" : "components/{{exportsLowerCase}}/{{exports}}{{ext}}",
+        "template-test.js" : "tests/{{exportsLowerCase}}-test.custom"
       },
       "script" : [{
         "name": "exports",
