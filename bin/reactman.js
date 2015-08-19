@@ -141,17 +141,25 @@ function runScript(data) {
         fileName = fileFolderExp.exec(files[file])[2];
         result.ext = path.extname(file); // file extension
 
-        // if the value has a handlebars string then make that folder
+        // if the folder has a handlebars string then make that folder
         if(folder.indexOf("{{") > -1) {
           makeFolder(config.outputFolder + renderToString(folder, result));
         }
 
+        // if the filename has a handlebars string then make that folder
+        if(fileName.indexOf("{{") > -1) {
+          fileName = renderToString(fileName, result);
+        } else {
+          fileName = result.exportsLowerCase + result.ext;
+        }
+
+          console.log(fileName)
         // write the template to the filesystem
         writeTemplate(
           config.templatesFolder + file,
           result,
           config.outputFolder + renderToString(folder, result),
-          renderToString(fileName, result)
+          fileName
         );
       }
     }
