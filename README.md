@@ -14,7 +14,9 @@ Reactman away!
 
 RECENT UPDATES
 --------------
-File names are now templateable. eg 
+Script items converted to slugs as well as lowerCase
+
+File names are now templateable. eg
 `"template.jsx" : "components/{{exportsLowerCase}}/{{exports}}{{ext}}"`
 
 EXAMPLE
