@@ -2,11 +2,6 @@
 
 "use strict";
 
-/**
- * This is a bit of a cluserfuck as I work out what the best way to configure
- * this little fella.
- */
-
 /*eslint-env node */
 
 // Load Deps
@@ -17,6 +12,7 @@ var minimist = require("minimist");
 var prompt = require("prompt");
 var chalk = require("chalk");
 var slug = require("slug");
+var writeError = require("../src/writeError");
 var args = minimist(process.argv.slice(2));
 var baseScript = [{
   "name": "script",
@@ -25,17 +21,6 @@ var baseScript = [{
   "type": "string"
 }];
 var config;
-
-/**
- * STOUT an Error Message
- * @param  {string} msg error mesasge
- * @return {null}
- */
-function writeError(msg) {
-  process.stdout.write(chalk.red("Fatal Error: " + msg + "\n"));
-  throw new Error(msg);
-}
-
 
 /**
  * Render a HB template
@@ -111,7 +96,7 @@ function runScript(data) {
   // Run chosen script
   prompt.get(script, function (err, result) {
 
-    var fileFolderExp = new RegExp('^(.*/)([^/]*)$');
+    var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
     var folder;
     var fileName;
 
@@ -153,7 +138,6 @@ function runScript(data) {
           fileName = result.exportsLowerCase + result.ext;
         }
 
-          console.log(fileName)
         // write the template to the filesystem
         writeTemplate(
           config.templatesFolder + file,
