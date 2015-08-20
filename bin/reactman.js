@@ -113,8 +113,13 @@ function runScript(data) {
     }
 
     // merge ticket numbers and url if defined
-    if(result.ticket) {
+    if(result.ticket && config.issue_tracker) {
       result.ticketLink = config.issue_tracker + result.ticket;
+    } else if(result.ticket && !config.issue_tracker) {
+      result.ticketLink = result.ticket;
+      process.stdout.write(chalk.yellow(
+        "Warning: Ticket script found but no issue_tracker in config"
+      ));
     }
 
     // Loop over files, create folders if templated and write out output
