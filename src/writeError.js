@@ -5,7 +5,7 @@
 var chalk = require("chalk");
 
 /**
- * STOUT an Error Message
+ * STOUT an Error Message and then Throw it
  *
  * Reactman has failed in his mission, but who is to blame for this lamentable
  * state of affairs?
