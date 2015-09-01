@@ -32,7 +32,7 @@ function writeIntro() {
   process.stdout.write(chalk.blue("--------------\n"));
 }
 
-module.exports.writeMessage = {
+module.exports = {
   error: writeError,
   log: writeLog,
   warn: writeWarning,

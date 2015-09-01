@@ -5,14 +5,14 @@
 /*eslint-env node */
 
 // Load Deps
-var handlebars = require("handlebars");
 var fs = require("fs");
 var path = require("path");
 var minimist = require("minimist");
 var prompt = require("prompt");
-var chalk = require("chalk");
 var slug = require("slug");
-var writeError = require("../src/writeError");
+var writeMessage = require("../src/writeMessage");
+var writeTemplate = require("../src/fileWriter");
+var renderToString = require("../src/renderTemplate");
 var args = minimist(process.argv.slice(2));
 var baseScript = [{
   "name": "script",
@@ -22,18 +22,7 @@ var baseScript = [{
 }];
 var config;
 
-/**
- * Render a HB template
- */
-function renderToString(source, data) {
-  var template = handlebars.compile(source);
-  var outputString = template(data);
-  if(outputString.length === 0) {
-    writeError("Bad template");
-  } else {
-    return outputString;
-  }
-}
+
 
 /**
  * Make the component directory
@@ -45,12 +34,12 @@ function makeFolder(dir) {
   // Make the folder, warn if exisits, log if made
   fs.mkdir(folder, function(err) {
     if (err && err.code === "EEXIST") {
-      process.stdout.write(chalk.yellow("Directory exists: " + dir + "\n"));
+      writeMessage.warn(dir + " already exisits");
     } else if(err) {
-      writeError("Check config outputFolder: " + config.outputFolder);
+      writeMessage.error("Check config outputFolder: " + config.outputFolder);
     } else {
       // successfully created folder
-      process.stdout.write(chalk.green("Made: " + dir + "\n"));
+      writeMessage.log("Made: " + dir);
     }
   });
 }
@@ -58,32 +47,32 @@ function makeFolder(dir) {
 /**
  * Write and populate a template to destination
  */
-function writeTemplate(source, results, outputFolder, outputFile) {
-
-  var output = path.resolve(process.cwd(), outputFolder + outputFile);  // output folder and file
-  var input = path.resolve(process.cwd(), source); // template file
-
-  // read
-  fs.readFile(input, function(err, data){
-    if (!err) {
-      // make the buffer into a string
-      var fileString = data.toString();
-      // call the render function
-      var content = renderToString(fileString, results);
-      // write
-      fs.writeFile(output, content, function(werr) {
-        if(!werr) {
-          process.stdout.write(chalk.green("Wrote: " + output + "\n"));
-        } else {
-          writeError("File write error");
-        }
-      });
-
-    } else {
-      writeError("File read error :" + input);
-    }
-  });
-}
+// function writeTemplate(source, results, outputFolder, outputFile) {
+//
+//   var output = path.resolve(process.cwd(), outputFolder + outputFile);  // output folder and file
+//   var input = path.resolve(process.cwd(), source); // template file
+//
+//   // read
+//   fs.readFile(input, function(err, data){
+//     if (!err) {
+//       // make the buffer into a string
+//       var fileString = data.toString();
+//       // call the render function
+//       var content = renderToString(fileString, results);
+//       // write
+//       fs.writeFile(output, content, function(werr) {
+//         if(!werr) {
+//           process.stdout.write(chalk.green("Wrote: " + output + "\n"));
+//         } else {
+//           writeError("File write error");
+//         }
+//       });
+//
+//     } else {
+//       writeError("File read error :" + input);
+//     }
+//   });
+// }
 
 /**
  * Run the chosen script
@@ -101,7 +90,7 @@ function runScript(data) {
     var fileName;
 
     if(err) {
-      writeError("Prompt error: " + err);
+      writeMessage.error("Prompt error: " + err);
     }
 
     // loop results and make each value lowerCase
@@ -117,9 +106,7 @@ function runScript(data) {
       result.ticketLink = config.issue_tracker + result.ticket;
     } else if(result.ticket && !config.issue_tracker) {
       result.ticketLink = result.ticket;
-      process.stdout.write(chalk.yellow(
-        "Warning: Ticket script found but no issue_tracker in config"
-      ));
+      writeMessage.warn("Ticket script found but no issue_tracker in config");
     }
 
     // Loop over files, create folders if templated and write out output
@@ -159,12 +146,12 @@ function runScript(data) {
 if(args.config) {
   config = require(path.resolve(process.cwd(), args.config));
 } else {
-  writeError("Please supply a config file.");
+  writeMessage.error("Please supply a config file.");
 }
 
 // set script
 if(!config.scripts) {
-  writeError("Please supply a set of scripts.");
+  writeMessage.error("Please supply a set of scripts.");
 }
 
 // set default script for first prompt
@@ -173,26 +160,27 @@ if(config.default_script) {
 }
 
 // START IO
-process.stdout.write(chalk.blue("Reactman Away!\n"));
-process.stdout.write(chalk.blue("--------------\n"));
+
+// Intro
+writeMessage.intro();
 
 // Start Prompt
 prompt.message = "Reactman".green;
 prompt.delimiter = " : ".green;
 prompt.start();
 
-// Prompt for script to run§
+// Prompt for script to run
 prompt.get(baseScript, function (err, result) {
 
   if(err) {
-    writeError("Prompt error");
+    writeMessage.error("Prompt error");
   }
 
   // check and then run script
   if(config.scripts[result.script]) {
     runScript(config.scripts[result.script]);
   } else {
-    writeError("Script " + result.script + " not found in config. Exiting.");
+    writeMessage.error("Script " + result.script + " not found in config. Exiting.");
   }
 
 });
