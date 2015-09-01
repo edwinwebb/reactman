@@ -19,4 +19,22 @@ function writeError(msg) {
   throw new Error(msg);
 }
 
-module.exports.writeError = writeError;
+function writeLog(msg) {
+  process.stdout.write(chalk.green(msg + "\n"));
+}
+
+function writeWarning(msg) {
+  process.stdout.write("Warning: " + chalk.green(msg + "\n"));
+}
+
+function writeIntro() {
+  process.stdout.write(chalk.blue("Reactman Away!\n"));
+  process.stdout.write(chalk.blue("--------------\n"));
+}
+
+module.exports.writeMessage = {
+  error: writeError,
+  log: writeLog,
+  warn: writeWarning,
+  intro: writeIntro
+};
