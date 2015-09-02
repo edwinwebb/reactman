@@ -10,9 +10,9 @@ var path = require("path");
 var minimist = require("minimist");
 var prompt = require("prompt");
 var slug = require("slug");
-var writeMessage = require("../src/writeMessage");
-var writeTemplate = require("../src/fileWriter");
-var renderToString = require("../src/renderTemplate");
+var VoiceOfTruth = require("../src/VoiceOfTruth");
+var writeTemplate = require("../src/PenOfJustice");
+var renderTemplateToString = require("../src/TemplateOfPurity");
 var args = minimist(process.argv.slice(2));
 var baseScript = [{
   "name": "script",
@@ -34,12 +34,12 @@ function makeFolder(dir) {
   // Make the folder, warn if exisits, log if made
   fs.mkdir(folder, function(err) {
     if (err && err.code === "EEXIST") {
-      writeMessage.warn(dir + " already exisits");
+      VoiceOfTruth.warn(dir + " already exisits");
     } else if(err) {
-      writeMessage.error("Check config outputFolder: " + config.outputFolder);
+      VoiceOfTruth.error("Check config outputFolder: " + config.outputFolder);
     } else {
       // successfully created folder
-      writeMessage.log("Made: " + dir);
+      VoiceOfTruth.log("Made: " + dir);
     }
   });
 }
@@ -60,7 +60,7 @@ function runScript(data) {
     var fileName;
 
     if(err) {
-      writeMessage.error("Prompt error: " + err);
+      VoiceOfTruth.error("Prompt error: " + err);
     }
 
     // loop results and make each value lowerCase
@@ -76,7 +76,7 @@ function runScript(data) {
       result.ticketLink = config.issue_tracker + result.ticket;
     } else if(result.ticket && !config.issue_tracker) {
       result.ticketLink = result.ticket;
-      writeMessage.warn("Ticket script found but no issue_tracker in config");
+      VoiceOfTruth.warn("Ticket script found but no issue_tracker in config");
     }
 
     // Loop over files, create folders if templated and write out output
@@ -90,12 +90,12 @@ function runScript(data) {
 
         // if the folder has a handlebars string then make that folder
         if(folder.indexOf("{{") > -1) {
-          makeFolder(config.outputFolder + renderToString(folder, result));
+          makeFolder(config.outputFolder + renderTemplateToString(folder, result));
         }
 
         // if the filename has a handlebars string then make that folder
         if(fileName.indexOf("{{") > -1) {
-          fileName = renderToString(fileName, result);
+          fileName = renderTemplateToString(fileName, result);
         } else {
           fileName = result.exportsLowerCase + result.ext;
         }
@@ -104,7 +104,7 @@ function runScript(data) {
         writeTemplate(
           config.templatesFolder + file,
           result,
-          config.outputFolder + renderToString(folder, result),
+          config.outputFolder + renderTemplateToString(folder, result),
           fileName
         );
       }
@@ -116,12 +116,12 @@ function runScript(data) {
 if(args.config) {
   config = require(path.resolve(process.cwd(), args.config));
 } else {
-  writeMessage.error("Please supply a config file.");
+  VoiceOfTruth.error("Please supply a config file.");
 }
 
 // set script
 if(!config.scripts) {
-  writeMessage.error("Please supply a set of scripts.");
+  VoiceOfTruth.error("Please supply a set of scripts.");
 }
 
 // set default script for first prompt
@@ -132,7 +132,7 @@ if(config.default_script) {
 // START IO
 
 // Intro
-writeMessage.intro();
+VoiceOfTruth.intro();
 
 // Start Prompt
 prompt.message = "Reactman".green;
@@ -143,14 +143,14 @@ prompt.start();
 prompt.get(baseScript, function (err, result) {
 
   if(err) {
-    writeMessage.error("Prompt error");
+    VoiceOfTruth.error("Prompt error");
   }
 
   // check and then run script
   if(config.scripts[result.script]) {
     runScript(config.scripts[result.script]);
   } else {
-    writeMessage.error("Script " + result.script + " not found in config. Exiting.");
+    VoiceOfTruth.error("Script " + result.script + " not found in config. Exiting.");
   }
 
 });

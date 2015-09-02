@@ -4,8 +4,8 @@
 
 var fs = require("fs");
 var path = require("path");
-var writeMessage = require("../src/writeMessage");
-var renderToString = require("../src/renderTemplate");
+var writeMessage = require("./VoiceOfTruth");
+var renderToString = require("./TemplateOfPurity");
 
 /**
  * Write and populate a template to destination

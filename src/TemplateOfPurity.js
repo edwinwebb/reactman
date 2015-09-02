@@ -7,7 +7,7 @@
  /*eslint-env node */
 
  var handlebars = require("handlebars");
- var writeMessage = require("../src/writeMessage");
+ var writeMessage = require("./PenOfJustice");
 
  /**
   * Render a HB template
