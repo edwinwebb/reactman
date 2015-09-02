@@ -45,36 +45,6 @@ function makeFolder(dir) {
 }
 
 /**
- * Write and populate a template to destination
- */
-// function writeTemplate(source, results, outputFolder, outputFile) {
-//
-//   var output = path.resolve(process.cwd(), outputFolder + outputFile);  // output folder and file
-//   var input = path.resolve(process.cwd(), source); // template file
-//
-//   // read
-//   fs.readFile(input, function(err, data){
-//     if (!err) {
-//       // make the buffer into a string
-//       var fileString = data.toString();
-//       // call the render function
-//       var content = renderToString(fileString, results);
-//       // write
-//       fs.writeFile(output, content, function(werr) {
-//         if(!werr) {
-//           process.stdout.write(chalk.green("Wrote: " + output + "\n"));
-//         } else {
-//           writeError("File write error");
-//         }
-//       });
-//
-//     } else {
-//       writeError("File read error :" + input);
-//     }
-//   });
-// }
-
-/**
  * Run the chosen script
  */
 function runScript(data) {
