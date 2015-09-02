@@ -1,3 +1,10 @@
+/**
+ * VoiceOfTruth
+ *
+ * Reactmans' powerful messaging to the prompt.
+ *
+ */
+
 "use strict";
 
 /*eslint-env node */
