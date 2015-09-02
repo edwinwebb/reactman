@@ -1,7 +1,7 @@
 /**
  * PenOfJustice
  *
- * Reactmans' faithful file writer. It's a pen. It's just. 
+ * Reactmans' faithful file writer. It's a pen. It's just.
  *
  */
 
