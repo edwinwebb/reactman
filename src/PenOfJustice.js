@@ -1,3 +1,10 @@
+/**
+ * PenOfJustice
+ *
+ * Reactmans' faithful file writer. It's a pen. It's just. 
+ *
+ */
+
 "use strict";
 
 /*eslint-env node */
@@ -8,7 +15,12 @@ var writeMessage = require("./VoiceOfTruth");
 var renderToString = require("./TemplateOfPurity");
 
 /**
- * Write and populate a template to destination
+ * Write a file to the system
+ * @param  {string} source       File source
+ * @param  {object} results      Prompt results
+ * @param  {string} outputFolder
+ * @param  {string} outputFile   fileName
+ * @return {bool}                Success
  */
 function writeTemplate(source, results, outputFolder, outputFile) {
 
@@ -29,10 +41,12 @@ function writeTemplate(source, results, outputFolder, outputFile) {
         } else {
           writeMessage.error("File write error");
         }
+        return werr;
       });
 
     } else {
       writeMessage.error("File read error :" + input);
+      return false;
     }
   });
 }
