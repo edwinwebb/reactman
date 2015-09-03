@@ -9,7 +9,7 @@ var fs = require("fs");
 var path = require("path");
 
 var TemplateOfTruth = require("../src/TemplateOfPurity");
-var writeTemplate = require("../src/PenOfJustice");
+var PenOfJustice = require("../src/PenOfJustice");
 
 describe('Tests Run', function () {
   it('Success', function () {
@@ -52,6 +52,17 @@ describe('TemplateOfPurity', function() {
 });
 
 describe('PenOfJustice', function() {
+  it('Create Folder', function(){
+    var dir = './test/output/empty-folder';
+
+    function cb(success) {
+      var success = fs.existsSync(dir);
+      assert.equal(true, success);
+    }
+
+    PenOfJustice.makeFolder(dir, cb);
+
+  });
   it('Write Basic File', function(){
     var source = './test/templates/penOfJustice-test.txt';
     var results = {"something" : "is heroic"};
@@ -65,7 +76,7 @@ describe('PenOfJustice', function() {
       assert.equal(true, writtenFile === expected);
     }
 
-    writeTemplate(source, results, folder, file, cb);
+    PenOfJustice.writeTemplate(source, results, folder, file, cb);
 
   });
 });

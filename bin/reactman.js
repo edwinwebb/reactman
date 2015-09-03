@@ -5,13 +5,12 @@
 /*eslint-env node */
 
 // Load Deps
-var fs = require("fs");
 var path = require("path");
 var minimist = require("minimist");
 var prompt = require("prompt");
 var slug = require("slug");
 var VoiceOfTruth = require("../src/VoiceOfTruth");
-var writeTemplate = require("../src/PenOfJustice");
+var PenOfJustice = require("../src/PenOfJustice");
 var renderTemplateToString = require("../src/TemplateOfPurity");
 var args = minimist(process.argv.slice(2));
 var baseScript = [{
@@ -21,28 +20,6 @@ var baseScript = [{
   "type": "string"
 }];
 var config;
-
-
-
-/**
- * Make the component directory
- */
-function makeFolder(dir) {
-
-  var folder = path.resolve(process.cwd(), dir);
-
-  // Make the folder, warn if exisits, log if made
-  fs.mkdir(folder, function(err) {
-    if (err && err.code === "EEXIST") {
-      VoiceOfTruth.warn(dir + " already exisits");
-    } else if(err) {
-      VoiceOfTruth.error("Check config outputFolder: " + config.outputFolder);
-    } else {
-      // successfully created folder
-      VoiceOfTruth.log("Made: " + dir);
-    }
-  });
-}
 
 /**
  * Run the chosen script
@@ -90,7 +67,7 @@ function runScript(data) {
 
         // if the folder has a handlebars string then make that folder
         if(folder.indexOf("{{") > -1) {
-          makeFolder(config.outputFolder + renderTemplateToString(folder, result));
+          PenOfJustice.makeFolder(config.outputFolder + renderTemplateToString(folder, result));
         }
 
         // if the filename has a handlebars string then make that folder
@@ -101,7 +78,7 @@ function runScript(data) {
         }
 
         // write the template to the filesystem
-        writeTemplate(
+        PenOfJustice.writeTemplate(
           config.templatesFolder + file,
           result,
           config.outputFolder + renderTemplateToString(folder, result),

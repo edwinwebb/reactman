@@ -3,6 +3,10 @@
  *
  * Reactmans' faithful file writer. It's a pen. It's just.
  *
+ * Reads, templates and then writes a file.
+ *
+ * @todo Should the Pen use the VoiceOfTurth? Probably not. Pass errors in callbacks.
+ *
  */
 
 "use strict";
@@ -11,7 +15,7 @@
 
 var fs = require("fs");
 var path = require("path");
-var writeMessage = require("./VoiceOfTruth");
+var VoiceOfTruth = require("./VoiceOfTruth");
 var renderToString = require("./TemplateOfPurity");
 
 /**
@@ -37,9 +41,9 @@ function writeTemplate(source, results, outputFolder, outputFile, callback) {
       // write
       fs.writeFile(output, content, function(werr) {
         if(!werr) {
-          writeMessage.log("Wrote: " + output);
+          VoiceOfTruth.log("Wrote: " + output);
         } else {
-          writeMessage.error("File write error");
+          VoiceOfTruth.error("File write error");
         }
         if(callback) {
           callback(werr);
@@ -48,7 +52,7 @@ function writeTemplate(source, results, outputFolder, outputFile, callback) {
       });
 
     } else {
-      writeMessage.error("File read error :" + input);
+      VoiceOfTruth.error("File read error :" + input);
 
       if(callback) {
         callback(false);
@@ -58,4 +62,37 @@ function writeTemplate(source, results, outputFolder, outputFile, callback) {
   });
 }
 
-module.exports = writeTemplate;
+/**
+ * Makes a folder on the filesystem
+ * warn if exisits, log if made
+ *
+ * @param  {string}     dir directory path
+ * @param  {function}   callback(success, error)
+ * @return {null}
+ */
+function makeFolder(dir, callback) {
+
+  var folder = path.resolve(process.cwd(), dir);
+
+  fs.mkdir(folder, function(err) {
+    if (err && err.code === "EEXIST") {
+      VoiceOfTruth.warn(dir + " already exisits");
+    } else if(err) {
+      VoiceOfTruth.error("Directory creation problem, check config.json outputFolder");
+      if(callback) {
+        callback(false, err);
+      }
+    } else {
+      // successfully created folder
+      VoiceOfTruth.log("Made: " + dir);
+      if(callback) {
+        callback(true, null);
+      }
+    }
+  });
+}
+
+module.exports = {
+  writeTemplate: writeTemplate,
+  makeFolder: makeFolder
+};
