@@ -120,7 +120,7 @@ prompt.start();
 prompt.get(baseScript, function (err, result) {
 
   if(err) {
-    VoiceOfTruth.error("Prompt error");
+    VoiceOfTruth.error("Prompt error.");
   }
 
   // check and then run script
