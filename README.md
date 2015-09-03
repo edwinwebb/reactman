@@ -184,11 +184,11 @@ ROADMAP
 -------
 * [DONE] Useable for React Components
 * [SKIPPED] Flux/Reflux Templating & better config
-* [CURRENT] Custom Scripts
-* Better testing, break out code to modules
+* [DONE] Custom Scripts
+* [IN PROGRESS] Better testing, break out code to modules
 * General improvements to scripts and configs, more control of input & output
 * Better workflows and examples, eg state commits, update issue trackers
-* Cute website
+* Cute website & logo
 * Repository of templates and scripts
 
 CONTRIBUTING

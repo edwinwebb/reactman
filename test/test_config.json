@@ -27,7 +27,7 @@
         "name": "description",
         "description": "Description",
         "default": "A react component",
-        "required": true,
+        "required": false,
         "type": "string"
       }, {
         "name": "ticket",

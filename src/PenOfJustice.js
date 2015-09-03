@@ -22,7 +22,7 @@ var renderToString = require("./TemplateOfPurity");
  * @param  {string} outputFile   fileName
  * @return {bool}                Success
  */
-function writeTemplate(source, results, outputFolder, outputFile) {
+function writeTemplate(source, results, outputFolder, outputFile, callback) {
 
   var output = path.resolve(process.cwd(), outputFolder + outputFile);  // output folder and file
   var input = path.resolve(process.cwd(), source); // template file
@@ -41,11 +41,18 @@ function writeTemplate(source, results, outputFolder, outputFile) {
         } else {
           writeMessage.error("File write error");
         }
+        if(callback) {
+          callback(werr);
+        }
         return werr;
       });
 
     } else {
       writeMessage.error("File read error :" + input);
+
+      if(callback) {
+        callback(false);
+      }
       return false;
     }
   });
