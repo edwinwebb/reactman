@@ -20,6 +20,9 @@ var renderToString = require("./TemplateOfPurity");
 
 /**
  * Write a file to the system
+ *
+ * @exports {function}  writeTemplate
+ *
  * @param  {string} source       File source
  * @param  {object} results      Prompt results
  * @param  {string} outputFolder
@@ -65,6 +68,8 @@ function writeTemplate(source, results, outputFolder, outputFile, callback) {
 /**
  * Makes a folder on the filesystem
  * warn if exisits, log if made
+ *
+ * @exports {function}  makeFolder
  *
  * @param  {string}     dir directory path
  * @param  {function}   callback(success, error)
