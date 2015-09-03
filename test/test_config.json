@@ -13,25 +13,25 @@
       },
       "script" : [{
         "name": "exports",
-        "description": "Exports",
+        "message": "Exports",
         "required": true,
         "default": "Exports",
         "type": "string"
       }, {
         "name": "extends",
-        "description": "Extends",
+        "message": "Extends",
         "default": "Extends",
         "required": true,
         "type": "string"
       }, {
         "name": "description",
-        "description": "Description",
+        "message": "Description",
         "default": "A react component",
         "required": false,
         "type": "string"
       }, {
         "name": "ticket",
-        "description": "Tracking ID",
+        "message": "Tracking ID",
         "default": "JIRA-####",
         "required": false,
         "type": "string"

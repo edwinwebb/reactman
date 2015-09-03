@@ -7,7 +7,7 @@
 // Load Deps
 var path = require("path");
 var minimist = require("minimist");
-var prompt = require("prompt");
+var prompt = require("inquirer");
 var slug = require("slug");
 var VoiceOfTruth = require("../src/VoiceOfTruth");
 var PenOfJustice = require("../src/PenOfJustice");
@@ -15,7 +15,7 @@ var renderTemplateToString = require("../src/TemplateOfPurity");
 var args = minimist(process.argv.slice(2));
 var baseScript = [{
   "name": "script",
-  "description": "Choose a Script from your config.",
+  "message": "Choose a Script from your config.",
   "required": true,
   "type": "string"
 }];
@@ -30,14 +30,14 @@ function runScript(data) {
   var files = data.files;
 
   // Run chosen script
-  prompt.get(script, function (err, result) {
+  prompt.get(script, function (result) {
 
     var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
     var folder;
     var fileName;
 
-    if(err) {
-      VoiceOfTruth.error("Prompt error: " + err);
+    if(!result) {
+      VoiceOfTruth.error("Prompt error");
     }
 
     // loop results and make each value lowerCase
@@ -112,12 +112,12 @@ if(config.default_script) {
 VoiceOfTruth.intro();
 
 // Start Prompt
-prompt.message = "Reactman".green;
-prompt.delimiter = " : ".green;
-prompt.start();
+// prompt.message = "Reactman".green;
+// prompt.delimiter = " : ".green;
+// prompt.start();
 
 // Prompt for script to run
-prompt.get(baseScript, function (err, result) {
+prompt.prompt(baseScript, function (err, result) {
 
   if(err) {
     VoiceOfTruth.error("Prompt error.");
