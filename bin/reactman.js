@@ -17,7 +17,7 @@ var baseScript = [{
   "name": "script",
   "message": "Choose a Script from your config.",
   "required": true,
-  "type": "string"
+  "type": "list"
 }];
 var config;
 
@@ -105,6 +105,11 @@ if(!config.scripts) {
 if(config.default_script) {
   baseScript[0].default = config.default_script;
 }
+
+// set the choices for the first prompt
+//baseScript[0].choices =
+console.log(Object.keys(config.scripts))
+return;
 
 // START IO
 

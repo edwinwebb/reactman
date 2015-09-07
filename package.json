@@ -35,7 +35,6 @@
     "handlebars": "^3.0.3",
     "inquirer": "^0.9.0",
     "minimist": "^1.1.2",
-    "prompt": "^0.2.14",
     "slug": "^0.9.1"
   },
   "devDependencies": {
