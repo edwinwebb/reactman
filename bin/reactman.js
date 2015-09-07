@@ -30,7 +30,7 @@ function runScript(data) {
   var files = data.files;
 
   // Run chosen script
-  prompt.get(script, function (result) {
+  prompt.prompt(script, function (result) {
 
     var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
     var folder;
@@ -111,15 +111,10 @@ if(config.default_script) {
 // Intro
 VoiceOfTruth.intro();
 
-// Start Prompt
-// prompt.message = "Reactman".green;
-// prompt.delimiter = " : ".green;
-// prompt.start();
-
 // Prompt for script to run
-prompt.prompt(baseScript, function (err, result) {
+prompt.prompt(baseScript, function (result) {
 
-  if(err) {
+  if(!result) {
     VoiceOfTruth.error("Prompt error.");
   }
 
