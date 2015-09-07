@@ -201,7 +201,7 @@ ROADMAP
 CONTRIBUTING
 ------------
 Reactman is a young buck who has more training to complete. Can the community
-support his heroic efforts?
+support his near-heroic efforts?
 
 TESTS
 -----
