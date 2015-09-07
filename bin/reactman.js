@@ -107,9 +107,7 @@ if(config.default_script) {
 }
 
 // set the choices for the first prompt
-//baseScript[0].choices =
-console.log(Object.keys(config.scripts))
-return;
+baseScript[0].choices = Object.keys(config.scripts);
 
 // START IO
 
