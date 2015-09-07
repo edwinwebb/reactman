@@ -12,8 +12,15 @@ command line with NPM scripts.
 
 Reactman away!
 
+BREAKING CHANGES
+----------------
+* V3 has updated to the Inquirer engine. In your config, change all `description`
+keys to `message`
+
 RECENT UPDATES
 --------------
+Changed prompting engine from Prompt to Inquirer (breaking change)
+
 Script items converted to slugs as well as lowerCase
 
 File names are now templateable. eg
@@ -124,7 +131,7 @@ example
 * * * value : The output directory, also passed the results from the script for
 templating. If it has a handlebars expression Reactman will attempt to make this
 directory. The {{ext}} key is populated from the source file extension.
-* * script : An array of prompts. See https://github.com/flatiron/prompt for
+* * script : An array of prompts. See https://github.com/sboudrias/Inquirer.js for
 more information.
 
 Example config (used in the Reactman tests)
@@ -143,25 +150,25 @@ Example config (used in the Reactman tests)
       },
       "script" : [{
         "name": "exports",
-        "description": "Exports",
+        "message": "Exports",
         "required": true,
         "default": "Exports",
         "type": "string"
       }, {
         "name": "extends",
-        "description": "Extends",
+        "message": "Extends",
         "default": "Extends",
         "required": true,
         "type": "string"
       }, {
         "name": "description",
-        "description": "Description",
+        "message": "Description",
         "default": "A react component",
         "required": true,
         "type": "string"
       }, {
         "name": "ticket",
-        "description": "Tracking ID",
+        "message": "Tracking ID",
         "default": "JIRA-####",
         "required": false,
         "type": "string"
@@ -185,8 +192,8 @@ ROADMAP
 * [DONE] Useable for React Components
 * [SKIPPED] Flux/Reflux Templating & better config
 * [DONE] Custom Scripts
-* [IN PROGRESS] Better testing, break out code to modules
-* General improvements to scripts and configs, more control of input & output
+* [DONE] Better testing, break out code to modules
+* [In Progress] General improvements to scripts and configs, more control of input & output
 * Better workflows and examples, eg state commits, update issue trackers
 * Cute website & logo
 * Repository of templates and scripts
@@ -194,7 +201,7 @@ ROADMAP
 CONTRIBUTING
 ------------
 Reactman is a young buck who has more training to complete. Can the community
-support his heroic efforts?
+support his near-heroic efforts?
 
 TESTS
 -----
