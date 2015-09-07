@@ -56,13 +56,13 @@ Reactman then prompts the user with a configurable script
 ```json
 "script" : [{
   "name": "exports",
-  "description": "Exports"
+  "message": "Exports"
 }, {
   "name": "extends",
-  "description": "Extends"
+  "message": "Extends"
 }, {
   "name": "description",
-  "description": "Description"
+  "message": "Description"
 }]
 ```
 
