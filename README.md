@@ -26,7 +26,11 @@ delimiters are now `{%=` and `%}`
 
 RECENT UPDATES
 --------------
-Changed prompting engine from Prompt to Inquirer (breaking change)
+Changed Handlebars to Blueimp (breaking change), should allow for more
+flexibility in output.
+
+Changed prompting engine from Prompt to Inquirer (breaking change), should allow
+more options for populating your templates.
 
 Script items converted to slugs as well as lowerCase
 
@@ -36,7 +40,7 @@ File names are now templateable. eg
 EXAMPLE
 -------
 
-Multiple Handlebars templates are taken as the input. A more in depth example is
+Multiple Blueimp templates are taken as the input. A more in depth example is
 discussed in the configuration and demoed in the tests.
 
 ```javascript
@@ -136,7 +140,7 @@ example
 * * `files` : The files to load for templating
 * * * key : the template to load
 * * * value : The output directory, also passed the results from the script for
-templating. If it has a handlebars expression Reactman will attempt to make this
+templating. If it has a Blueimp expression Reactman will attempt to make this
 directory. The {%=o.ext%} key is populated from the source file extension.
 * * script : An array of prompts. See https://github.com/sboudrias/Inquirer.js for
 more information.
@@ -201,6 +205,7 @@ ROADMAP
 * [DONE] Custom Scripts
 * [DONE] Better testing, break out code to modules
 * [In Progress] General improvements to scripts and configs, more control of input & output
+* ES6 in templates
 * Better workflows and examples, eg state commits, update issue trackers
 * Cute website & logo
 * Repository of templates and scripts
