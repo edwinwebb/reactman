@@ -1,7 +1,7 @@
 REACTMAN
 ========
 Reactman is a CLI code generation tool which will take multiple templates,
-populate them via the command line prompt script, and then rename them into your
+populate them via the command line prompt script, and then move them into your
 codebase.
 
 Reactman's mission is to increase productivity and have your teams codebase
@@ -12,10 +12,17 @@ command line with NPM scripts.
 
 Reactman away!
 
-BREAKING CHANGES
-----------------
+BREAKING CHANGES in V3
+----------------------
+Reactman has upgraded his trusty tools to bring the community more power to
+control both input and output. Reactman's mission is to prove to the world that
+he has what it takes to get the job done.
+
 * V3 has updated to the Inquirer engine. In your config, change all `description`
 keys to `message`
+
+* V3 had updated the templating engine to Blueimp Templates, the template
+delimiters are now `{%=` and `%}`
 
 RECENT UPDATES
 --------------
@@ -24,7 +31,7 @@ Changed prompting engine from Prompt to Inquirer (breaking change)
 Script items converted to slugs as well as lowerCase
 
 File names are now templateable. eg
-`"template.jsx" : "components/{{exportsLowerCase}}/{{exports}}{{ext}}"`
+`"template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}{%=o.ext%}"`
 
 EXAMPLE
 -------
@@ -36,17 +43,17 @@ discussed in the configuration and demoed in the tests.
 import React from "react";
 
 /**
- * {{description}}
+ * {%=o.description%}
  *
- * @exports {{exports}}
- * @extends {{extends}}
+ * @exports {%=o.exports%}
+ * @extends {%=o.extends%}
  */
-export default class {{exports}} extends {{extends}} {
+export default class {%=o.exports%} extends {%=o.extends%} {
   /**
-   * @return {ReactElement} {{exports}}
+   * @return {ReactElement} {%=o.exports%}
    */
   render() {
-    return(<div>{{exports}}</div>)
+    return(<div>{%=o.exports%}</div>)
   }
 }
 ```
@@ -130,7 +137,7 @@ example
 * * * key : the template to load
 * * * value : The output directory, also passed the results from the script for
 templating. If it has a handlebars expression Reactman will attempt to make this
-directory. The {{ext}} key is populated from the source file extension.
+directory. The {%=o.ext%} key is populated from the source file extension.
 * * script : An array of prompts. See https://github.com/sboudrias/Inquirer.js for
 more information.
 
@@ -144,9 +151,9 @@ Example config (used in the Reactman tests)
   "scripts" : {
     "component" : {
       "files" : {
-        "template.jsx" : "components/{{exportsLowerCase}}/{{exports}}{{ext}}",
-        "template.css" : "components/{{exportsLowerCase}}/{{exports}}{{ext}}",
-        "template-test.js" : "tests/{{exportsLowerCase}}-test.custom"
+        "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}{%=o.ext%}",
+        "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}{%=o.ext%}",
+        "template-test.js" : "tests/{%=o.exportsLowerCase%}-test.custom"
       },
       "script" : [{
         "name": "exports",
