@@ -1,21 +1,21 @@
 /*eslint-env mocha */
 
 /**
- * Component Test for {{exports}}
+ * Component Test for {%=o.exports%}
  *
- * {{description}}
+ * {%=o.description%}
  *
- * @see {{ticketLink}}
+ * @see {%=o.ticketLink%}
  */
 
 import React from 'react';
 import TestUtils from 'react/lib/ReactTestUtils';
 import expect from 'expect';
-import {{exports}} from '../components/{{exportsLowerCase}}/{{exportsLowerCase}}.jsx';
+import {%=o.exports%} from '../components/{%=o.exportsLowerCase%}/{%=o.exportsLowerCase%}.jsx';
 
 describe('root', () => {
-  it('{{exports}} renders without problems', () => {
-    const {{exportsLowerCase}} = TestUtils.renderIntoDocument(<{{exports}} />);
-    expect({{exportsLowerCase}}).toExist();
+  it('{%=o.exports%} renders without problems', () => {
+    const {%=o.exportsLowerCase%} = TestUtils.renderIntoDocument(<{%=o.exports%} />);
+    expect({%=o.exportsLowerCase%}).toExist();
   });
 });

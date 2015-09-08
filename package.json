@@ -31,8 +31,8 @@
   },
   "homepage": "https://github.com/edwinwebb/reactman",
   "dependencies": {
+    "blueimp-tmpl": "^2.5.5",
     "chalk": "^1.1.0",
-    "handlebars": "^3.0.3",
     "inquirer": "^0.9.0",
     "minimist": "^1.1.2",
     "slug": "^0.9.1"

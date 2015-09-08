@@ -6,10 +6,10 @@
   "scripts" : {
     "component" : {
       "files" : {
-        "template.jsx" : "components/{{exportsLowerCase}}/{{exports}}-custom{{ext}}",
-        "template.old.jsx" : "components/{{exportsLowerCase}}/",
-        "template.css" : "components/{{exportsLowerCase}}/{{exports}}-custom{{ext}}",
-        "template-test.js" : "tests/{{exportsLowerCase}}-test.custom"
+        "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom{%=o.ext%}",
+        "template.old.jsx" : "components/{%=o.exportsLowerCase%}/",
+        "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom{%=o.ext%}",
+        "template-test.js" : "tests/{%=o.exportsLowerCase%}-test.custom"
       },
       "script" : [{
         "name": "exports",

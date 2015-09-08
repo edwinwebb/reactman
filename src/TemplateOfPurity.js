@@ -8,7 +8,7 @@
 
 /*eslint-env node */
 
-var handlebars = require("handlebars");
+var tmpl = require("blueimp-tmpl").tmpl;
 var writeMessage = require("./PenOfJustice");
 
 /**
@@ -19,8 +19,8 @@ var writeMessage = require("./PenOfJustice");
  * @return {string}        Rendered Template
  */
 function renderToString(source, data) {
-  var template = handlebars.compile(source);
-  var outputString = template(data);
+  //var template = tmpl.compile(source);
+  var outputString = tmpl(source, data);
 
   if(outputString.length === 0) {
     writeMessage.error("Bad template");

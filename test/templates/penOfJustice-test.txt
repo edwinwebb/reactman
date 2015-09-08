@@ -1,1 +1,1 @@
-Reactman {{something}}
+Reactman {%=o.something%}

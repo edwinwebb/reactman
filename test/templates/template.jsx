@@ -1,14 +1,14 @@
 import React from "react";
-import styles from "./{{exportsLowerCase}}.css";
+import styles from "./{%=o.exportsLowerCase%}.css";
 
 /**
- * {{description}}
+ * {%=o.description%}
  *
- * @exports {{exports}}
- * @extends {{extends}}
- * @see {{ticketLink}}
+ * @exports {%=o.exports%}
+ * @extends {%=o.extends%}
+ * @see {%=o.ticketLink%}
  */
-export default class {{exports}} extends {{extends}} {
+export default class {%=o.exports%} extends {%=o.extends%} {
 
   // propTypes
   static propTypes = {}
@@ -17,15 +17,15 @@ export default class {{exports}} extends {{extends}} {
   static defaultProps = {}
 
   /**
-   * Render {{exports}} Component
-   * @return {ReactElement} {{exports}}
+   * Render {%=o.exports%} Component
+   * @return {ReactElement} {%=o.exports%}
    */
   render() {
     const rootClass = styles.root;
 
     return(
       <div className={rootClass}>
-        {{exports}}
+        {%=o.exports%}
       </div>
     )
   }

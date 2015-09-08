@@ -53,7 +53,7 @@ function runScript(data) {
       result.ticketLink = config.issue_tracker + result.ticket;
     } else if(result.ticket && !config.issue_tracker) {
       result.ticketLink = result.ticket;
-      VoiceOfTruth.warn("Ticket script found but no issue_tracker in config");
+      VoiceOfTruth.warn("Ticket link found but no issue_tracker in config");
     }
 
     // Loop over files, create folders if templated and write out output
@@ -66,12 +66,12 @@ function runScript(data) {
         result.ext = path.extname(file); // file extension
 
         // if the folder has a handlebars string then make that folder
-        if(folder.indexOf("{{") > -1) {
+        if(folder.indexOf("{%=") > -1) {
           PenOfJustice.makeFolder(config.outputFolder + renderTemplateToString(folder, result));
         }
 
         // if the filename has a handlebars string then make that folder
-        if(fileName.indexOf("{{") > -1) {
+        if(fileName.indexOf("{%=") > -1) {
           fileName = renderTemplateToString(fileName, result);
         } else {
           fileName = result.exportsLowerCase + result.ext;

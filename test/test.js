@@ -42,7 +42,7 @@ describe('Reactman', function() {
 
 describe('TemplateOfPurity', function() {
   it('Write Basic Template', function(){
-    var template = '{{reactman}}\'s trusty companion, the {{sidekick}}';
+    var template = '{%=o.reactman%}\'s trusty companion, the {%=o.sidekick%}';
     var data = {'reactman' : 'Reactman', 'sidekick' : 'Boy Bunny'};
     var expected = 'Reactman\'s trusty companion, the Boy Bunny';
     var result = TemplateOfTruth(template, data);
