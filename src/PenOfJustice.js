@@ -41,8 +41,7 @@ function writeTemplate(source, results, outputFolder, outputFile, callback) {
       var fileString = data.toString();
       // call the render function
       var content = renderToString(fileString, results);
-      console.log(output);
-      console.log(content);
+
       // write
       fs.writeFile(output, content, function(werr) {
         if(callback) {
@@ -52,7 +51,6 @@ function writeTemplate(source, results, outputFolder, outputFile, callback) {
         if(!werr) {
           VoiceOfTruth.log("Wrote: " + output);
         } else {
-          console.log(werr);
           VoiceOfTruth.error("File write error");
         }
 
