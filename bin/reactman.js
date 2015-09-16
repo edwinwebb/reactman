@@ -42,7 +42,8 @@ function runScript(data) {
 
     // loop results and make each value lowerCase
     for(var res in result) {
-      if (result.hasOwnProperty(res)) {
+      if (result.hasOwnProperty(res) && typeof(result[res]) === "string") {
+        console.log(res);
         result[res + "LowerCase"] = result[res].toLowerCase();
         result[res + "Slug"] = slug(result[res]);
       }

@@ -16,7 +16,7 @@
         "message": "Exports",
         "required": true,
         "default": "Exports",
-        "type": "string"
+        "type": "string",
       }, {
         "name": "extends",
         "message": "Extends",
@@ -27,14 +27,27 @@
         "name": "description",
         "message": "Description",
         "default": "A react component",
-        "required": false,
+        "required": true,
         "type": "string"
       }, {
         "name": "ticket",
         "message": "Tracking ID",
         "default": "JIRA-####",
-        "required": false,
+        "required": true,
         "type": "string"
+      }, {
+        "name": "rootstyle",
+        "message": "Root Style Name",
+        "default": 1,
+        "required": true,
+        "type": "list",
+        "choices" : ["main", "root", "other"]
+      }, {
+        "name": "includeprops",
+        "message": "Include Props in file?",
+        "default": true,
+        "required": true,
+        "type": "confirm"
       }]
     }
   }
