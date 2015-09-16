@@ -22,7 +22,7 @@ he has what it takes to get the job done.
 keys to `message`
 
 * V3 had updated the templating engine to Blueimp Templates, the template
-delimiters are now `{%=` and `%}`
+delimiters are now `{%=` and `%}` and logicfull.
 
 RECENT UPDATES
 --------------
