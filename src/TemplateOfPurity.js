@@ -12,9 +12,9 @@ var tmpl = require("blueimp-tmpl").tmpl;
 var VoiceOfTruth = require("./VoiceOfTruth");
 
 /**
- * Render a Handlebars Template
+ * Render a Blueimp Template
  *
- * @param  {string} source Handlebars Template
+ * @param  {string} source Blueimp Template
  * @param  {object} data   Populating data
  * @return {string}        Rendered Template
  */
