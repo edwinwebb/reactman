@@ -84,7 +84,7 @@ function makeFolder(dir, callback) {
 
   fs.mkdir(folder, function(err) {
     if (err && err.code === "EEXIST") {
-      VoiceOfTruth.warn(dir + " already exisits");
+      VoiceOfTruth.warn(dir + " already exists");
     } else if(err) {
       VoiceOfTruth.error("Directory creation problem, check config.json outputFolder");
       if(callback) {
