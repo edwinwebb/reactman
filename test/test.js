@@ -63,6 +63,17 @@ describe('PenOfJustice', function() {
     PenOfJustice.makeFolder(dir, cb);
 
   });
+  it('Warn on Failed Create', function(){
+    var dir = './test/output/empty-folder';
+
+    function cb(success) {
+      var success = fs.existsSync(dir);
+      assert.equal(true, success);
+    }
+
+    PenOfJustice.makeFolder(dir, cb);
+
+  });
   it('Write Basic File', function(){
     var source = './test/templates/penOfJustice-test.txt';
     var results = {"something" : "is heroic"};

@@ -19,23 +19,22 @@ control both input and output. Reactman's mission is to prove to the world that
 he has what it takes to get the job done.
 
 * V3 has updated to the Inquirer engine. In your config, change all `description`
-keys to `message`
+keys to `message` and `string` to `input`
 
 * V3 had updated the templating engine to Blueimp Templates, the template
 delimiters are now `{%=` and `%}` and logicfull.
 
 RECENT UPDATES
 --------------
-Changed Handlebars to Blueimp (breaking change), should allow for more
+Exporting the config as a module allows validation and filtering of prompts.
+
+More complex examples in tests. List, choice, checkbox are all exampled.
+
+Changed Handlebars to Blueimp (breaking change), allows for more
 flexibility in output.
 
-Changed prompting engine from Prompt to Inquirer (breaking change), should allow
+Changed prompting engine from Prompt to Inquirer (breaking change), allows
 more options for populating your templates.
-
-Script items converted to slugs as well as lowerCase
-
-File names are now templateable. eg
-`"template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}{%=o.ext%}"`
 
 EXAMPLE
 -------
@@ -99,7 +98,6 @@ export default class Reactman extends React.Component {
 }
 ```
 
-
 INSTALL AND USE
 ---------------
 
@@ -127,6 +125,9 @@ The first prompt will ask for the key in the scripts part of the config.
 CONFIG
 ------
 Reactman needs a configuration to run. Optional keys are marked with a *
+
+You can also export an object form a js file, this allows you to use validation
+and filter functions.
 
 See the working example in `./test/` for more information
 
