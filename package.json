@@ -1,14 +1,14 @@
 {
   "name": "reactman",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Reactman is a CLI code generation tool which will take templates and populate them via the command line prompt script and then move them into your codebase.",
   "main": "./bin/reactman.js",
   "bin": {
     "reactman": "./bin/reactman.js"
   },
   "scripts": {
-    "reactmantest": "node ./bin/reactman.js --config ./test/test_config.json",
-    "pretest": "rimraf ./test/output/components && mkdir ./test/output/components && rimraf ./test/output/tests && mkdir ./test/output/tests",
+    "reactmantest": "node ./bin/reactman.js --config ./test/test_config.js",
+    "pretest": "rimraf ./test/output/components && mkdir ./test/output/components && rimraf ./test/output/tests && rimraf ./test/output/empty-folder && mkdir ./test/output/tests",
     "test": "npm run lint && npm run reactmantest && mocha",
     "lint": "eslint ./bin/ ./src/"
   },
