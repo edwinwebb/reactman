@@ -5,7 +5,7 @@
  *
  * Reads, templates and then writes a file.
  *
- * @todo Should the Pen use the VoiceOfTurth? Probably not. Pass errors in callbacks? Promises? 
+ * @todo Should the Pen use the VoiceOfTurth? Probably not. Pass errors in callbacks? Promises?
  *
  */
 
