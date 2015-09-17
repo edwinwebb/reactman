@@ -98,6 +98,8 @@ export default class Reactman extends React.Component {
 }
 ```
 
+You can find more complex examples in my pixi-seed project
+
 INSTALL AND USE
 ---------------
 

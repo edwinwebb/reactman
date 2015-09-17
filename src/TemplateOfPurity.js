@@ -9,7 +9,7 @@
 /*eslint-env node */
 
 var tmpl = require("blueimp-tmpl").tmpl;
-var writeMessage = require("./PenOfJustice");
+var VoiceOfTruth = require("./VoiceOfTruth");
 
 /**
  * Render a Handlebars Template
@@ -23,7 +23,7 @@ function renderToString(source, data) {
   var outputString = tmpl(source, data);
 
   if(outputString.length === 0) {
-    writeMessage.error("Bad template");
+    VoiceOfTruth.error("Bad template");
   } else {
     return outputString;
   }
