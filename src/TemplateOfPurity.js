@@ -19,7 +19,6 @@ var VoiceOfTruth = require("./VoiceOfTruth");
  * @return {string}        Rendered Template
  */
 function renderToString(source, data) {
-  //var template = tmpl.compile(source);
   var outputString = tmpl(source, data);
 
   if(outputString.length === 0) {
