@@ -65,12 +65,12 @@ function runScript(data) {
         fileName = fileFolderExp.exec(files[file])[2];
         result.ext = path.extname(file); // file extension
 
-        // if the folder has a handlebars string then make that folder
+        // if the folder has a template string then make that folder
         if(folder.indexOf("{%=") > -1) {
           PenOfJustice.makeFolder(config.outputFolder + renderTemplateToString(folder, result));
         }
 
-        // if the filename has a handlebars string then make that folder
+        // if the filename has a template string then make that folder
         if(fileName.indexOf("{%=") > -1) {
           fileName = renderTemplateToString(fileName, result);
         } else {
