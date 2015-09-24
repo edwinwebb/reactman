@@ -36,8 +36,8 @@ flexibility in output.
 Changed prompting engine from Prompt to Inquirer (breaking change), allows
 more options for populating your templates.
 
-EXAMPLE
--------
+BASIC EXAMPLE
+-------------
 
 Multiple Blueimp templates are taken as the input. A more in depth example is
 discussed in the configuration and demoed in the tests.
@@ -98,7 +98,7 @@ export default class Reactman extends React.Component {
 }
 ```
 
-You can find more complex examples in my pixi-seed project
+You can find more complex examples in my pixi-seed project and in the tests.
 
 INSTALL AND USE
 ---------------
@@ -110,11 +110,11 @@ Install via NPM
 Then add this line to your NPM scripts
 
 `
-"reactman" : "reactman --config path-to-config.json"
+"reactman" : "reactman --config path-to-config.js"
 `
 
 Make a config file from the example below. You will also need some templates.
-You can grab the example templates from ./test/templates
+You can grab the example templates from ./test/templates.
 
 Then finally type at your prompt to create a new component from your templates
 
@@ -128,7 +128,7 @@ CONFIG
 ------
 Reactman needs a configuration to run. Optional keys are marked with a *
 
-You can also export an object form a js file, this allows you to use validation
+You can also export an object form a .js file, this allows you to use validation
 and filter functions.
 
 See the working example in `./test/` for more information
@@ -150,16 +150,33 @@ more information.
 
 Example config (used in the Reactman tests)
 
-```json
-{
+```javascript
+function variableName(i) {
+  var exp = /^[a-zA-Z][a-zA-Z0-9]*?$/;
+  var pass = exp.test(i);
+
+  if(pass) {
+    return true;
+  } else {
+    return "Invalid variable name, please try again...";
+  }
+}
+
+function prependJIRA(i) {
+  return "JIRA-" + i;
+}
+
+module.exports = {
   "templatesFolder" : "./test/templates/",
   "outputFolder" : "./test/output/",
   "issue_tracker" : "https://github.com/edwinwebb/reactman/issues/",
+  "default_script" : "component",
   "scripts" : {
     "component" : {
       "files" : {
-        "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}{%=o.ext%}",
-        "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}{%=o.ext%}",
+        "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom{%=o.ext%}",
+        "template.old.jsx" : "components/{%=o.exportsLowerCase%}/",
+        "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom{%=o.ext%}",
         "template-test.js" : "tests/{%=o.exportsLowerCase%}-test.custom"
       },
       "script" : [{
@@ -167,25 +184,57 @@ Example config (used in the Reactman tests)
         "message": "Exports",
         "required": true,
         "default": "Exports",
-        "type": "string"
+        "type": "input",
+        "validate" : variableName
       }, {
         "name": "extends",
         "message": "Extends",
         "default": "Extends",
         "required": true,
-        "type": "string"
+        "type": "input",
+        "validate" : variableName
       }, {
         "name": "description",
         "message": "Description",
         "default": "A react component",
         "required": true,
-        "type": "string"
+        "type": "input"
       }, {
         "name": "ticket",
         "message": "Tracking ID",
-        "default": "JIRA-####",
+        "default": "123",
         "required": false,
-        "type": "string"
+        "type": "input",
+        "filter" : prependJIRA
+      }, {
+        "name": "rootstyle",
+        "message": "Root Style Name",
+        "default": 1,
+        "required": false,
+        "type": "list",
+        "choices" : ["main", "root", "other"]
+      }, {
+        "name": "includeprops",
+        "message": "Include Props in file?",
+        "default": true,
+        "required": false,
+        "type": "confirm"
+      }, {
+        "name": "importlist",
+        "message": "Choose file includes",
+        "default": ["classnames"],
+        "required": false,
+        "type": "checkbox",
+        "choices" : [{
+          "name" : "ClassNames",
+          "value" : "classnames"
+        }, {
+          "name" : "PropTypes",
+          "value" : "proptypes"
+        }, {
+          "name" : "PureComponent",
+          "value" : "purecomp"
+        }]
       }]
     }
   }
@@ -195,8 +244,8 @@ Example config (used in the Reactman tests)
 
 TEMPLATES
 ------
-Template variables are defined in the `scripts` in your config file. Each value
-is also converted to LowerCase and it's slug.
+Template variables are defined in the `scripts` in your config file. Each
+`type: input` value is also converted to LowerCase and it's Slug.
 
 eg : exports => exportsLowerCase
 eg : exports => exportsSlug
@@ -208,7 +257,6 @@ ROADMAP
 * [DONE] Custom Scripts
 * [DONE] Better testing, break out code to modules
 * [In Progress] General improvements to scripts and configs, more control of input & output
-* ES6 in templates
 * Better workflows and examples, eg state commits, update issue trackers
 * Cute website & logo
 * Repository of templates and scripts
