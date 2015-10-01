@@ -16,7 +16,7 @@ var renderTemplateToString = require("../src/TemplateOfPurity");
 var args = minimist(process.argv.slice(2));
 var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
 
-// The following functions are tasks for asymc.waterfall
+// The following functions are tasks for async.waterfall
 // @see https://github.com/caolan/async#waterfall
 
 /**
@@ -51,13 +51,11 @@ function checkScripts(config, callback) {
 
   if(!config.scripts) {
     callback(new Error("Please supply a set of prompt scripts in your config."));
-    return;
   } else {
     baseScript.choices = Object.keys(config.scripts);
     baseScript.default = config.default_script || 0;
+    callback(null, baseScript, config);
   }
-
-  callback(null, baseScript, config);
 }
 
 /**
@@ -114,7 +112,6 @@ function runChosenScript(chosenScript, config, callback) {
       callback(new Error("No files found in selected script."));
     }
   });
-
 }
 
 /**
