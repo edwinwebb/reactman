@@ -21,8 +21,8 @@ var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
 
 /**
  * Check that user has passed in config arg and `require` the file
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
+ * @param  {Function} callback async waterfall callback
+ * @return {[type]}
  */
 function loadConfig(callback) {
   if(!args.config) {
@@ -37,8 +37,8 @@ function loadConfig(callback) {
  * Check that the user has a valid config and modify it
  *
  * @param  {object}   config   Reactman config
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
+ * @param  {Function} callback async waterfall callback
+ * @return {[type]}
  */
 function checkScripts(config, callback) {
 
@@ -61,10 +61,10 @@ function checkScripts(config, callback) {
 /**
  * Prompt the user with the baseScript found in checkScripts and check it
  *
- * @param  {object}   baseScript
- * @param  {object}   config      Reactman config
- * @param  {Function} callback   [description]
- * @return {[type]}              [description]
+ * @param  {object}   baseScript   from checkScripts
+ * @param  {object}   config       Reactman config
+ * @param  {Function} callback     async waterfall callback
+ * @return null
  */
 function promptBaseScript(baseScript, config, callback){
   prompt.prompt(baseScript, function (result) {
@@ -80,10 +80,10 @@ function promptBaseScript(baseScript, config, callback){
  * Prompts user with script chosen from config, adds some new keys to
  * the result of the chosen script.
  *
- * @param  {[type]}   chosenScript [description]
- * @param  {[type]}   config       [description]
- * @param  {Function} callback     [description]
- * @return {[type]}                [description]
+ * @param  {object}   chosenScript from config
+ * @param  {object}   config       full config
+ * @param  {Function} callback     async waterfall callback
+ * @return null
  */
 function runChosenScript(chosenScript, config, callback) {
   var script = chosenScript.script;
@@ -121,8 +121,8 @@ function runChosenScript(chosenScript, config, callback) {
  * @param  {array}    files    Array of files to output
  * @param  {object}   result   chosen script results
  * @param  {object}   config   full config
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
+ * @param  {Function} callback async waterfall callback
+ * @return null
  */
 function makeFolders(files, result, config, callback) {
 
@@ -145,8 +145,8 @@ function makeFolders(files, result, config, callback) {
  * @param  {array}    files    Array of files to output
  * @param  {object}   result   chosen script results
  * @param  {object}   config   full config
- * @param  {Function} callback [description]
- * @return {[type]}            [description]
+ * @param  {Function} callback async waterfall callback
+ * @return null
  */
 function writeFiles(files, result, config, callback) {
   async.forEachOf(files, function(file, key, asCallback) {
