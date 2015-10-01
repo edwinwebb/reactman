@@ -21,9 +21,8 @@ module.exports = {
   "scripts" : {
     "component" : {
       "files" : {
-        "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom{%=o.ext%}",
-        "template.old.jsx" : "components/{%=o.exportsLowerCase%}/",
-        "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom{%=o.ext%}",
+        "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom.jsx",
+        "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom.css",
         "template-test.js" : "tests/{%=o.exportsLowerCase%}-test.custom"
       },
       "script" : [{

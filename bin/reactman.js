@@ -16,6 +16,9 @@ var renderTemplateToString = require("../src/TemplateOfPurity");
 var args = minimist(process.argv.slice(2));
 var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
 
+// The following functions are tasks for asymc.waterfall
+// @see https://github.com/caolan/async#waterfall
+
 /**
  * Check that user has passed in config arg and `require` the file
  * @param  {Function} callback [description]
@@ -31,7 +34,7 @@ function loadConfig(callback) {
 }
 
 /**
- * Check that the user has a valid config
+ * Check that the user has a valid config and modify it
  *
  * @param  {object}   config   Reactman config
  * @param  {Function} callback [description]
@@ -59,6 +62,7 @@ function checkScripts(config, callback) {
 
 /**
  * Prompt the user with the baseScript found in checkScripts and check it
+ *
  * @param  {object}   baseScript
  * @param  {object}   config      Reactman config
  * @param  {Function} callback   [description]
@@ -114,72 +118,61 @@ function runChosenScript(chosenScript, config, callback) {
 }
 
 /**
- * Loop over output files as defined in config. Make folders, template
- * and write to fs
+ * Loop over output files as defined in config. Make folders after
+ * templating them.
  *
- * @param  {array}   files      Array of files to output
+ * @param  {array}    files    Array of files to output
  * @param  {object}   result   chosen script results
  * @param  {object}   config   full config
  * @param  {Function} callback [description]
  * @return {[type]}            [description]
  */
-function outputFiles(files, result, config, callback) {
-  var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
-  var folder;
-  var fileName;
-
-  // loop over output
-  for (var file in files) {
-    if (files.hasOwnProperty(file)) {
-
-      // extract folder and filename
-      folder = fileFolderExp.exec(files[file])[1];
-      fileName = fileFolderExp.exec(files[file])[2];
-      result.ext = path.extname(file); // file extension
-
-      // if the folder has a template string then make that folder
-      if(folder.indexOf("{%=") > -1) {
-        PenOfJustice.makeFolder(config.outputFolder + renderTemplateToString(folder, result),
-        function() {});
-      }
-
-      // if the filename has a template string then make that folder
-      if(fileName.indexOf("{%=") > -1) {
-        fileName = renderTemplateToString(fileName, result);
-      } else {
-        fileName = result.exportsLowerCase + result.ext;
-      }
-
-      // write the template to the filesystem
-      PenOfJustice.writeTemplate(
-        config.templatesFolder + file,
-        result,
-        config.outputFolder + renderTemplateToString(folder, result),
-        fileName,
-        function() {}
-      );
-    }
-  }
-
-  callback(null);
-}
-
 function makeFolders(files, result, config, callback) {
+
   async.each(files, function(file, asCallback) {
     var folder = fileFolderExp.exec(file)[1];
 
-    if(folder.indexOf("{%=") > -1) {
-      folder = config.outputFolder + renderTemplateToString(folder, result);
-    } else {
-      folder = config.outputFolder + folder;
-    }
+    folder = config.outputFolder + renderTemplateToString(folder, result);
 
     PenOfJustice.makeFolder(folder, asCallback);
 
+  }, function(err) {
+    callback(err, files, result, config);
+  });
+}
+
+/**
+ * Loop over output files as defined in config. Template filename
+ * and write it's templated contents to the fs.
+ *
+ * @param  {array}    files    Array of files to output
+ * @param  {object}   result   chosen script results
+ * @param  {object}   config   full config
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
+function writeFiles(files, result, config, callback) {
+  async.forEachOf(files, function(file, key, asCallback) {
+
+    var folder = fileFolderExp.exec(file)[1];
+    var fileName = fileFolderExp.exec(file)[2];
+
+    // render file extension, folder, and file names
+    folder = config.outputFolder + renderTemplateToString(folder, result);
+    fileName = renderTemplateToString(fileName, result);
+
+    // write the template to the filesystem
+    PenOfJustice.writeTemplate(
+      config.templatesFolder + key,
+      result,
+      folder,
+      fileName,
+      asCallback
+    );
   }, callback);
 }
 
-var tasks = [loadConfig, checkScripts, promptBaseScript, runChosenScript, makeFolders];
+var tasks = [loadConfig, checkScripts, promptBaseScript, runChosenScript, makeFolders, writeFiles];
 
 // Show the intro text
 VoiceOfTruth.intro();

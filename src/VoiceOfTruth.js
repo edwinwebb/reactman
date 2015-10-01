@@ -22,7 +22,7 @@ var chalk = require("chalk");
  * @exports writeError
  */
 function writeError(msg) {
-  process.stdout.write(chalk.red("Error: " + msg + "\n"));
+  process.stdout.write("Error: " + chalk.red(msg + "\n"));
   return msg;
 }
 
