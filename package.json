@@ -1,6 +1,6 @@
 {
   "name": "reactman",
-  "version": "3.2.0",
+  "version": "3.5.0",
   "description": "Reactman is a CLI code generation tool which will take templates and populate them via the command line prompt script and then move them into your codebase.",
   "main": "./bin/reactman.js",
   "bin": {
@@ -22,7 +22,8 @@
     "templating",
     "workflow",
     "build",
-    "react"
+    "react",
+    "productivity"
   ],
   "author": "Edwin Webb",
   "license": "ISC",
@@ -31,6 +32,7 @@
   },
   "homepage": "https://github.com/edwinwebb/reactman",
   "dependencies": {
+    "async": "^1.4.2",
     "blueimp-tmpl": "^2.5.5",
     "chalk": "^1.1.0",
     "inquirer": "^0.10.0",

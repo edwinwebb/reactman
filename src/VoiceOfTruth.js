@@ -23,7 +23,7 @@ var chalk = require("chalk");
  */
 function writeError(msg) {
   process.stdout.write(chalk.red("Fatal Error: " + msg + "\n"));
-  throw new Error(msg);
+  return msg;
 }
 
 /**
@@ -37,6 +37,7 @@ function writeError(msg) {
  */
 function writeLog(msg) {
   process.stdout.write(chalk.green(msg + "\n"));
+  return msg;
 }
 
 /**
@@ -50,6 +51,7 @@ function writeLog(msg) {
  */
 function writeWarning(msg) {
   process.stdout.write("Warning: " + chalk.green(msg + "\n"));
+  return msg;
 }
 
 /**
@@ -64,6 +66,7 @@ function writeWarning(msg) {
 function writeIntro() {
   process.stdout.write(chalk.blue("Reactman Away!\n"));
   process.stdout.write(chalk.blue("--------------\n"));
+  return true;
 }
 
 module.exports = {
