@@ -50,7 +50,7 @@ function writeLog(msg) {
  * @exports writeWarning
  */
 function writeWarning(msg) {
-  process.stdout.write("Warning: " + chalk.green(msg + "\n"));
+  process.stdout.write("Warning: " + chalk.yellow(msg + "\n"));
   return msg;
 }
 
