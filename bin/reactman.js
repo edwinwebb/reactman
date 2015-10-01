@@ -14,6 +14,7 @@ var VoiceOfTruth = require("../src/VoiceOfTruth");
 var PenOfJustice = require("../src/PenOfJustice");
 var renderTemplateToString = require("../src/TemplateOfPurity");
 var args = minimist(process.argv.slice(2));
+var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
 
 /**
  * Check that user has passed in config arg and `require` the file
@@ -87,7 +88,7 @@ function runChosenScript(chosenScript, config, callback) {
   var files = chosenScript.files;
 
   prompt.prompt(script, function (result) {
-    // loop results and make each value lowerCase
+    // loop results and make each value lowerCase and slug
     for(var res in result) {
       if (result.hasOwnProperty(res) && typeof result[res] === "string") {
         result[res + "LowerCase"] = result[res].toLowerCase();
@@ -112,11 +113,22 @@ function runChosenScript(chosenScript, config, callback) {
 
 }
 
+/**
+ * Loop over output files as defined in config. Make folders, template
+ * and write to fs
+ *
+ * @param  {array}   files      Array of files to output
+ * @param  {object}   result   chosen script results
+ * @param  {object}   config   full config
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
 function outputFiles(files, result, config, callback) {
   var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
   var folder;
   var fileName;
 
+  // loop over output
   for (var file in files) {
     if (files.hasOwnProperty(file)) {
 
@@ -127,7 +139,8 @@ function outputFiles(files, result, config, callback) {
 
       // if the folder has a template string then make that folder
       if(folder.indexOf("{%=") > -1) {
-        PenOfJustice.makeFolder(config.outputFolder + renderTemplateToString(folder, result));
+        PenOfJustice.makeFolder(config.outputFolder + renderTemplateToString(folder, result),
+        function() {});
       }
 
       // if the filename has a template string then make that folder
@@ -142,7 +155,8 @@ function outputFiles(files, result, config, callback) {
         config.templatesFolder + file,
         result,
         config.outputFolder + renderTemplateToString(folder, result),
-        fileName
+        fileName,
+        function() {}
       );
     }
   }
@@ -150,7 +164,22 @@ function outputFiles(files, result, config, callback) {
   callback(null);
 }
 
-var tasks = [loadConfig, checkScripts, promptBaseScript, runChosenScript, outputFiles];
+function makeFolders(files, result, config, callback) {
+  async.each(files, function(file, asCallback) {
+    var folder = fileFolderExp.exec(file)[1];
+
+    if(folder.indexOf("{%=") > -1) {
+      folder = config.outputFolder + renderTemplateToString(folder, result);
+    } else {
+      folder = config.outputFolder + folder;
+    }
+
+    PenOfJustice.makeFolder(folder, asCallback);
+
+  }, callback);
+}
+
+var tasks = [loadConfig, checkScripts, promptBaseScript, runChosenScript, makeFolders];
 
 // Show the intro text
 VoiceOfTruth.intro();

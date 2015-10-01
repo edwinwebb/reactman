@@ -17,9 +17,10 @@ var fs = require("fs");
 var path = require("path");
 var VoiceOfTruth = require("./VoiceOfTruth");
 var renderToString = require("./TemplateOfPurity");
+var async = require("async");
 
 /**
- * Write a file to the system
+ * Write a file to the system then calls mainCallback
  *
  * @exports {function}  writeTemplate
  *
@@ -27,45 +28,38 @@ var renderToString = require("./TemplateOfPurity");
  * @param  {object} results      Prompt results
  * @param  {string} outputFolder
  * @param  {string} outputFile   fileName
+ * @param  {func}   callback
  * @return {bool}                Success
  */
-function writeTemplate(source, results, outputFolder, outputFile, callback) {
+function writeTemplate(source, results, outputFolder, outputFile, mainCallback) {
 
   var output = path.resolve(process.cwd(), outputFolder + outputFile);  // output folder and file
   var input = path.resolve(process.cwd(), source); // template file
 
-  // read
-  fs.readFile(input, function(err, data){
-    if (!err) {
-      // make the buffer into a string
-      var fileString = data.toString();
-      // call the render function
-      var content = renderToString(fileString, results);
+  async.waterfall([
+    function readFile(callback) {
+      fs.readFile(input, function(err, data){
+        // make the buffer into a string
+        var fileString = data.toString();
+        // call the render function
+        var content = renderToString(fileString, results);
 
-      // write
-      fs.writeFile(output, content, function(werr) {
-        if(callback) {
-          callback(werr);
-        }
+        VoiceOfTruth.log("Read: " + input);
 
-        if(!werr) {
+        callback(err, content);
+      });
+    },
+    function writeFile(content, callback) {
+      fs.writeFile(output, content, function(err) {
+        if(!err) {
           VoiceOfTruth.log("Wrote: " + output);
         } else {
-          VoiceOfTruth.error("File write error");
+          VoiceOfTruth.error("File write error: " + output);
         }
-
-        return true;
+        callback(err);
       });
-
-    } else {
-      VoiceOfTruth.error("File read error :" + input);
-
-      if(callback) {
-        callback(false);
-      }
-      return false;
     }
-  });
+  ], mainCallback);
 }
 
 /**
@@ -81,21 +75,18 @@ function writeTemplate(source, results, outputFolder, outputFile, callback) {
 function makeFolder(dir, callback) {
 
   var folder = path.resolve(process.cwd(), dir);
+  var noDirErr = "Directory creation problem, check config.json outputFolder";
 
   fs.mkdir(folder, function(err) {
     if (err && err.code === "EEXIST") {
       VoiceOfTruth.warn(dir + " already exists");
+      callback(null, true);
     } else if(err) {
-      VoiceOfTruth.error("Directory creation problem, check config.json outputFolder");
-      if(callback) {
-        callback(false, err);
-      }
+      VoiceOfTruth.error(noDirErr);
+      callback(new Error(noDirErr));
     } else {
-      // successfully created folder
       VoiceOfTruth.log("Made: " + dir);
-      if(callback) {
-        callback(true, null);
-      }
+      callback(null, true);
     }
   });
 }
