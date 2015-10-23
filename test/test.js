@@ -32,12 +32,6 @@ describe('Reactman', function() {
       assert.equal(true, file.length > 0);
     });
   });
-  describe('He should output one old format file', function () {
-    it('V2-JSX', function () {
-      var file = fs.readFileSync(path.resolve(__dirname,'./output/components/exports/exports.jsx'));
-      assert.equal(true, file.length > 0);
-    });
-  });
 });
 
 describe('TemplateOfPurity', function() {

@@ -144,7 +144,7 @@ example
 * * * key : the template to load
 * * * value : The output directory, also passed the results from the script for
 templating. If it has a Blueimp expression Reactman will attempt to make this
-directory. The {%=o.ext%} key is populated from the source file extension.
+directory. 
 * * script : An array of prompts. See https://github.com/sboudrias/Inquirer.js for
 more information.
 
@@ -174,9 +174,8 @@ module.exports = {
   "scripts" : {
     "component" : {
       "files" : {
-        "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom{%=o.ext%}",
-        "template.old.jsx" : "components/{%=o.exportsLowerCase%}/",
-        "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom{%=o.ext%}",
+        "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom.js",
+        "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom.css",
         "template-test.js" : "tests/{%=o.exportsLowerCase%}-test.custom"
       },
       "script" : [{
