@@ -11,6 +11,12 @@
 var tmpl = require("blueimp-tmpl").tmpl;
 var VoiceOfTruth = require("./VoiceOfTruth");
 
+/**
+ * Check that there is something to template.
+ *
+ * @param  {string} str String to check
+ * @return {bool}       Template str present
+ */
 function checkValidSource(str) {
   return str.indexOf("{%") > -1;
 }
