@@ -11,6 +11,10 @@
 var tmpl = require("blueimp-tmpl").tmpl;
 var VoiceOfTruth = require("./VoiceOfTruth");
 
+function checkValidSource(str) {
+  return str.indexOf("{%") > -1;
+}
+
 /**
  * Render a Blueimp Template
  *
@@ -19,7 +23,8 @@ var VoiceOfTruth = require("./VoiceOfTruth");
  * @return {string}        Rendered Template
  */
 function renderToString(source, data) {
-  var outputString = tmpl(source, data);
+  var templateableSource = checkValidSource(source);
+  var outputString = templateableSource ? tmpl(source, data) : source;
 
   if(outputString.length === 0) {
     VoiceOfTruth.error("Bad template");
