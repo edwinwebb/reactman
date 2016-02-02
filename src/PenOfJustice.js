@@ -3,7 +3,7 @@
  *
  * Reactmans' faithful file writer. It's a pen. It's just.
  *
- * Reads, templates and then writes a file.
+ * Reads, templates, and then writes a file.
  *
  * @todo Should the Pen use the VoiceOfTurth? Probably not. Pass errors in callbacks? Promises?
  *

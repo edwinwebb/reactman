@@ -176,12 +176,12 @@ VoiceOfTruth.intro();
 
 // Start the waterfall
 async.waterfall(tasks, function done(err) {
-    if(!err) {
-      VoiceOfTruth.log("All done, Reactman Away!");
-    } else {
-      VoiceOfTruth.warn(err.message);
-      VoiceOfTruth.log(err.stack);
-      VoiceOfTruth.error("Error, R.I.P Reactman");
-    }
+  VoiceOfTruth.log("-----------------------------------");
+  if(!err) {
+    VoiceOfTruth.log("All done. Reactman up, up and away!");
+  } else {
+    VoiceOfTruth.warn(err.message);
+    VoiceOfTruth.log(err.stack);
+    VoiceOfTruth.error("Errors: R.I.P Reactman");
   }
-);
+});

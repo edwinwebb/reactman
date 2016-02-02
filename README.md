@@ -38,8 +38,13 @@ more options for populating your templates.
 BASIC EXAMPLE
 -------------
 
-Multiple Blueimp templates are taken as the input. A more in depth example is
-discussed in the configuration and demoed in the tests.
+Reactman needs at least two files to get started, a configuration file and a
+template. He's designed to use multiple templates and is generally used to
+bootstrap a component in a React project. A more in depth example is discussed
+in the configuration and demoed in the tests.
+
+Blueimp templates are taken as the input. This will be populated via the prompt
+then written to your project.
 
 ```javascript
 import React from "react";
@@ -60,7 +65,8 @@ export default class {%=o.exports%} extends {%=o.extends%} {
 }
 ```
 
-Reactman then prompts the user with a configurable script
+Reactman then prompts the user with a configurable script after running a command
+like 'npm run reactman'
 
 ```json
 "script" : [{

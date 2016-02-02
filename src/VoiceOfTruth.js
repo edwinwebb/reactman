@@ -64,8 +64,8 @@ function writeWarning(msg) {
  * @exports writeintro
  */
 function writeIntro() {
-  process.stdout.write(chalk.blue("Reactman Away!\n"));
-  process.stdout.write(chalk.blue("--------------\n"));
+  process.stdout.write(chalk.blue("This looks like a job for Reactman!\n"));
+  process.stdout.write(chalk.blue("-----------------------------------\n"));
   return true;
 }
 
