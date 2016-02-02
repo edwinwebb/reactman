@@ -23,7 +23,7 @@ module.exports = {
       "files" : {
         "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom.jsx",
         "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom.css",
-        "template-test.js" : "tests/{%=o.exportsLowerCase%}-test.custom"
+        "template-test.js" : "tests/exports-test.custom"
       },
       "script" : [{
         "name": "exports",
