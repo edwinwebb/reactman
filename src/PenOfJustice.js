@@ -39,12 +39,16 @@ function writeTemplate(source, results, outputFolder, outputFile, mainCallback) 
   async.waterfall([
     function readFile(callback) {
       fs.readFile(input, function(err, data){
-        // make the buffer into a string
-        var fileString = data.toString();
-        // call the render function
-        var content = renderToString(fileString, results);
+        var fileString;
+        var content;
 
         VoiceOfTruth.log("Read: " + input);
+
+        // make the buffer into a string
+        fileString = data.toString();
+
+        // call the render function
+        content = renderToString(fileString, results);
 
         callback(err, content);
       });
