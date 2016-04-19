@@ -8,6 +8,11 @@
       margin:0;
       font-family:sans-serif;
       font-size: 18px;
+      /*background-image: url(./hero.jpg);
+      background-position: 0 5em;
+      background-size:contain;
+      background-repeat:no-repeat;
+      background-attachment:fixed;*/
     }
 
     header {
@@ -17,6 +22,7 @@
     header img {
       width:100%;
       margin-top:3em;
+      /*opacity:0;*/
     }
 
     header nav {
@@ -44,6 +50,12 @@
       color:white;
       z-index:2;
       left:1em;
+    }
+
+    .content {
+      /*background:white;
+      overflow:auto;
+      box-shadow: 0 0 10px black;*/
     }
 
     main,aside {
@@ -98,15 +110,15 @@
     }
 
     h2 {
-      font-size: 2.0em; /* 36px */
-      line-height: 1.5em; /* 54px */
+      font-size: 2.0em;
+      line-height: 1.5em;
       margin-top: 0.7500em;
       margin-bottom: 0.0em;
     }
 
     h3 {
-      font-size: 1.3333em; /* 24px */
-      line-height: 1.1250em; /* 27px */
+      font-size: 1.3333em;
+      line-height: 1.1250em;
       margin-top: 1.1250em;
       margin-bottom: 0em;
     }
@@ -126,161 +138,255 @@
     <h1>REACTMAN</h1>
     <nav>
       <li>
-        <a href="about">about</a>
-        <a href="">set-up</a>
-        <a href="">basic config</a>
-        <a href="">advanced</a>
-        <a href="">examples</a>
-        <a href="">github</a>
+        <a href="#start">Getting started</a>
+        <a href="#advanced">Advanced</a>
+        <a href="#examples">Examples</a>
+        <a href="https://github.com/edwinwebb/reactman">Github</a>
       </li>
     </nav>
     <img src="./hero.jpg" alt="heroic code generation"/>
   </header>
-  <main>
-    <section>
-      <h2>Who is Reactman?</h2>
-      <p>Reactman helps you quickly authour new components in a unified manner across team-members.</p>
-      <p>Reactman is added to your NPM development dependancies and is initiated with NPM scripts. Reactman will prompt the developer to populate a set of templates which are added to your codebase.</p>
-      <p>We believe that front end development is becoming more complex across much larger codebases. Reactman helps codebases keep consistant code-styles, tests and documentaion. Reactman can be configured for any Node.js based project and is designed to be a part of agile workflows.</p>
-    </section>
-    <section>
-      <h2>Getting set up</h2>
-      <h3>Install</h3>
-      <p>Start by installing Reactman as a development dependacy. Reactman config is local your project and no global dependancies are required. Just type and go.</p>
-      <pre>npm install reactman --save-dev</pre>
-      <p>Once completed you might want to add a template or reactman folder to your codebase. Reactman is however quite agnostic.</p>
+  <div class="content">
 
-      <h3>Adding a config</h3>
-      <p>Reactman needs a json config to get started and know where to look for templates and where it will write file to. It's recommended you add this config to the subdirectory mentioned in the previous step.</p>
-      <p>The most important part of this file is the "scripts" section. This holds the template locations and the <a href="https://github.com/sboudrias/uirer.js" target="_blank">Inquirer.js</a> prompt script which will be presented to the developer. In this most basic example we simple ask for the module name to be exported.</p>
-      <pre>
-{
-  "templatesFolder" : "./templates/",
-  "outputFolder" : "./src/",
-  "scripts" : {
-    "component" : {
-      "files" : {
-        "example.jsx" : "components/{%=o.exports%}.jsx"
-      },
-      "script" : [{
-        "name": "exports",
-        "message": "Exports"
-      }]
-    }
-  }
-}
-      </pre>
-      <p>There are a few more basic options descibed in the README.</p>
-      <p>In advanced setups you can export the JSON and add some formatting and validation methods to your code. This is especially useful for checking variable names or code quality.</p>
+    <main>
+      <section>
+        <h2>Who is Reactman?</h2>
+        <p>Reactman helps you quickly authour new components in a unified manner across team-members.</p>
+        <p>Reactman is added to your NPM development dependancies and is initiated with NPM scripts. Reactman will prompt the developer to populate a set of templates which are added to your codebase.</p>
+        <p>We believe that front end development is becoming more complex across much larger codebases. Reactman helps codebases keep consistant code-styles, tests and documentaion. Reactman can be configured for any Node.js based project and is designed to be a part of agile workflows.</p>
+      </section>
+      <section id="start">
+        <h2>Getting set up</h2>
+        <h3>Install</h3>
+        <p>Start by installing Reactman as a development dependacy. Reactman config is local your project and no global dependancies are required. Just type and go.</p>
+        <pre>npm install reactman --save-dev</pre>
+        <p>Once completed you might want to add a template or reactman folder to your codebase. Reactman is however quite agnostic.</p>
 
-      <h3>Running the config</h3>
-      <p>To run the config you'll need to add a NPM script to your package.json file. This allows multiple configs for more expansive projects.</p>
-      <pre>
-"scripts" : {"reactman": "reactman --config ./templates/my-config.json"}
-      </pre>
+        <h3>Adding a config</h3>
+        <p>Reactman needs a json config to get started and know where to look for templates and where it will write file to. It's recommended you add this config to the subdirectory mentioned in the previous step.</p>
+        <p>The most important part of this file is the "scripts" section. This holds the template locations and the <a href="https://github.com/sboudrias/uirer.js" target="_blank">Inquirer.js</a> prompt script which will be presented to the developer. In this most basic example we simple ask for the module name to be exported.</p>
+        <pre>
+          {
+            "templatesFolder" : "./templates/",
+            "outputFolder" : "./src/",
+            "scripts" : {
+              "component" : {
+                "files" : {
+                  "example.jsx" : "components/{%=o.exports%}.jsx"
+                },
+                "script" : [{
+                  "name": "exports",
+                  "message": "Exports"
+                }]
+              }
+            }
+          }
+        </pre>
+        <p>There are a few more basic options descibed in the README.</p>
+        <p>In advanced setups you can export the JSON and add some formatting and validation methods to your code. This is especially useful for checking variable names or code quality.</p>
 
-      <h3>Adding the template</h3>
-      <p>Of course none of this work without a <a href="https://github.com/blueimp/JavaScript-Templates" target="_blank">BlueImp Javascript template</a>. Here's the example from the readme, it most cases it's authoured by the lead developer and maintained by the team.</p>
-      <pre>
-import React from "react";
+        <h3>Running the config</h3>
+        <p>To run the config you'll need to add a NPM script to your package.json file. This allows multiple configs for more expansive projects.</p>
+        <pre>
+          "scripts" : {"reactman": "reactman --config ./templates/my-config.json"}
+        </pre>
 
-/**
- * A new react components
- *
- * @exports {%=o.exports%}
- * @extends React.Component
- */
-export default class {%=o.exports%} extends React.Component {
-  /**
-   * @return {ReactElement} {%=o.exports%}
-   */
-  render() {
-    return(&lt;div&gt;{%=o.exports%}&lt;/div&gt;)
-  }
-}
-      </pre>
+        <h3>Adding the template</h3>
+        <p>Of course none of this work without a <a href="https://github.com/blueimp/JavaScript-Templates" target="_blank">BlueImp Javascript template</a>. Here's the example from the readme, it most cases it's authoured by the lead developer and maintained by the team.</p>
+        <pre>
+          import React from "react";
 
-      <h3>Reactman, away!</h3>
-      <pre>
-npm run reactman
-      </pre>
-      <p>Select 'component' and type a name and the file is generated.</p>
-      <pre>
-/**
- * A new react components
- *
- * @exports test
- * @extends React.Component
- */
-export default class test extends React.Component {
-  /**
-   * @return {ReactElement} test
-   */
-  render() {
-    return(&lt;div&gt;test&lt;/div&gt;)
-  }
-}
-      </pre>
-    </section>
-    <section>
-      <h2>Next steps</h2>
-      <p>Adding more scripts to the Reactman config is as easy as writing a new template and then matching the prompts. Let's take a look.</p>
-      <pre>
-{
-  "templatesFolder" : "./templates/",
-  "outputFolder" : "./src/",
-  "default_script" : "action",
-  "scripts" : {
-    "action" : {
-      "files" : {
-        "action.js" : "actions/{%=o.exports%}.jsx"
-      },
-      "script" : [{
-        "name": "exports",
-        "message": "Exports"
-      }]
-    },
-    "component" : {
-      "files" : {
-        "example.jsx" : "components/{%=o.exports%}.jsx"
-      },
-      "script" : [{
-        "name": "exports",
-        "message": "Exports"
-      }]
-    }
-  }
-}
-      </pre>
-      <p>It's as simplate as that. Reactman uses the uirer.js package and it's documentation can be found there.</p>
-    </section>
-    <section>
-      <h2></h2>
-      <h3></h3>
-      <p></p>
-      <p></p>
-    </section>
-    <section>
-      <h2></h2>
-      <h3></h3>
-      <p></p>
-      <p></p>
-    </section>
-  </main>
-  <aside>
-    <div class="circle">
-      <img src="./reactman-logo.svg" alt="Reactman">
-    </div>
-<p>Install</p>
+          /**
+          * A new react components
+          *
+          * @exports {%=o.exports%}
+          * @extends React.Component
+          */
+          export default class {%=o.exports%} extends React.Component {
+            /**
+            * @return {ReactElement} {%=o.exports%}
+            */
+            render() {
+              return(&lt;div&gt;{%=o.exports%}&lt;/div&gt;)
+            }
+          }
+        </pre>
+
+        <h3>Reactman, away!</h3>
+        <pre>npm run reactman</pre>
+        <p>Select 'component' and type a name and the file is generated.</p>
+        <pre>
+          /**
+          * A new react components
+          *
+          * @exports test
+          * @extends React.Component
+          */
+          export default class test extends React.Component {
+            /**
+            * @return {ReactElement} test
+            */
+            render() {
+              return(&lt;div&gt;test&lt;/div&gt;)
+            }
+          }
+        </pre>
+      </section>
+      <section id="advanced">
+        <h2>Next steps</h2>
+        <p>Adding more scripts to the Reactman config is as easy as writing a new template and then matching the prompts. Let's take a look.</p>
+        <pre>
+          {
+            "templatesFolder" : "./templates/",
+            "outputFolder" : "./src/",
+            "default_script" : "action",
+            "scripts" : {
+              "action" : {
+                "files" : {
+                  "action.js" : "actions/{%=o.exports%}.jsx"
+                },
+                "script" : [{
+                  "name": "exports",
+                  "message": "Exports"
+                }]
+              },
+              "component" : {
+                "files" : {
+                  "example.jsx" : "components/{%=o.exports%}.jsx"
+                },
+                "script" : [{
+                  "name": "exports",
+                  "message": "Exports"
+                }]
+              }
+            }
+          }
+        </pre>
+        <p>It's as simplate as that. Reactman uses the <a href="https://github.com/sboudrias/uirer.js" target="_blank">Inquirer.js</a> package. If we export the JSON from a JS file we can add some more advanced features to <a href="https://github.com/sboudrias/uirer.js" target="_blank">Inquirer.js</a>.</p>
+        <h3>Adding validation and filters</h3>
+        <p><a href="https://github.com/sboudrias/uirer.js" target="_blank">Inquirer.js</a> enables Reactman to "validate" or "filter" inputs with the corresponding keys. Each accepts a function as exampled below. Here we see only valid variable names being allowed for module naming and tranforming a comma-sperated list into an array for further processing in the template. For Redux Actions it's very useful to be able to type quickly generate the constants and functions associated with this type of file.</p>
+        <pre>
+
+          function variableName(i) {
+            var exp = /^[a-zA-Z][a-zA-Z0-9]*?$/;
+            var pass = exp.test(i);
+
+            if(pass) {
+              return true;
+            } else {
+              return "Invalid variable name, please try again...";
+            }
+          }
+
+          module.exports = {
+            "templatesFolder" : "./templates/",
+            "outputFolder" : "./src/",
+            "default_script" : "action",
+            "scripts" : {
+              "action" : {
+                "files" : {
+                  "action.js" : "actions/{%=o.exports%}.jsx"
+                },
+                "script" : [{
+                  "name": "exports",
+                  "message": "Exports",
+                  "required": true,
+                  "default": "NewComponent",
+                  "type": "input",
+                  "validate" : variableName
+                },{
+                  "name": "actions",
+                  "message": "Add functions",
+                  "required": false,
+                  "default": "",
+                  "type": "input",
+                  "filter" : function(i) {
+                    return i.replace(" ","").split(",");
+                  }
+                }]
+              },
+              "component" : {
+                "files" : {
+                  "example.jsx" : "components/{%=o.exports%}.jsx"
+                },
+                "script" : [{
+                  "name": "exports",
+                  "message": "Exports"
+                }]
+              }
+            }
+          }
+        </pre>
+        <h3>Updating templates</h3>
+        <p></p>
+        <pre>
+          /*
+          * action types
+          */
+          {% for(var i = 0; i < o.actions.length; i++) { %}
+          export const {%= o.actions[i].toUpperCase() %} = '{%= o.actions[i].toUpperCase() %}';
+          {% } %}
+          /*
+          * action creators
+          */
+          {% for(var i = 0; i < o.actions.length; i++) { %}
+          export function {%= o.actions[i] %}(input) {
+            return { type: {%= o.actions[i].toUpperCase() %}, input }
+          }
+          {% } %}
+        </pre>
+        <p>Will result in a file similar to...</p>
+        <pre>
+          /*
+          * action types
+          */
+          export const ADD = 'ADD';
+          export const REMOVE = 'REMOVE';
+          export const CLEAR = 'CLEAR';
+
+          /*
+          * action creators
+          */
+          export function add(input) {
+            return { type: ADD, input }
+          }
+
+          export function remove(input) {
+            return { type: REMOVE, input }
+          }
+
+          export function clear(input) {
+            return { type:  CLEAR, input }
+          }
+        </pre>
+        <p>Not bad for just a few second at the command line. The steps to take after this would be setting up tests to check these functions. That's a new template at a small edit to your config.</p>
+      </section>
+      <section id="#examples">
+        <h2>Examples</h2>
+        <p></p>
+        <h3></h3>
+        <p></p>
+      </section>
+      <section>
+        <h2>Contribute</h2>
+        <p>Reactman is a young buck who has more training to complete. Can the community support his near-heroic efforts?</p>
+        <p>His mission is to improve developer productivity and have codebases be clean and maintainable. Reactman wants you!</p>
+      </section>
+    </main>
+    <aside>
+      <div class="circle">
+        <img src="./reactman-logo.svg" alt="Reactman">
+      </div>
+      <p>Install</p>
 <pre>
 npm install reactman --save-dev
 </pre>
-<p>NPM script</p>
+      <p>NPM script</p>
 <pre>
-{"reactman": "reactman.js --config ./config.json"}
+{"reactman": "reactman --config ./config.json"}
 </pre>
-<p>config.json</p>
-<pre>
+      <p>config.json</p>
+      <pre>
 {
   "templatesFolder" : "./templates/",
   "outputFolder" : "./src/",
@@ -297,15 +403,15 @@ npm install reactman --save-dev
   }
 }
 </pre>
-<p>template.js</p>
-<pre>
-  /**
-   * @exports {%=o.exports%}
-   */
-  export default class {%=o.exports%} {
+      <p>template.js</p>
+      <pre>
+/**
+* @exports {%=o.exports%}
+*/
+export default class {%=o.exports%} {
 
-  }
-</pre>
-  </aside>
+}</pre>
+    </aside>
+  </div>
 </body>
 </html>
