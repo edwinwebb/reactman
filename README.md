@@ -11,30 +11,6 @@ command line with NPM scripts.
 
 Reactman away!
 
-BREAKING CHANGES in V3
-----------------------
-Reactman has upgraded his trusty tools to bring the community more power to
-control both input and output. Reactman's mission is to prove to the world that
-he has what it takes to get the job done.
-
-* V3 has updated to the Inquirer engine. In your config, change all `description`
-keys to `message` and `string` to `input`
-
-* V3 had updated the templating engine to Blueimp Templates, the template
-delimiters are now `{%=` and `%}` and logicfull.
-
-RECENT UPDATES
---------------
-Exporting the config as a module allows validation and filtering of prompts.
-
-More complex examples in tests. List, choice, checkbox are all exampled.
-
-Changed Handlebars to Blueimp (breaking change), allows for more
-flexibility in output.
-
-Changed prompting engine from Prompt to Inquirer (breaking change), allows
-more options for populating your templates.
-
 BASIC EXAMPLE
 -------------
 
@@ -128,6 +104,14 @@ npm run reactman
 `
 
 The first prompt will ask for the key in the scripts part of the config.
+
+TEMPLATES
+------
+Template variables are defined in the `scripts` in your config file. Each
+`type: input` value is also converted to LowerCase and it's Slug.
+
+eg : exports => exportsLowerCase
+eg : exports => exportsSlug
 
 CONFIG
 ------
@@ -246,13 +230,17 @@ module.exports = {
 
 ```
 
-TEMPLATES
-------
-Template variables are defined in the `scripts` in your config file. Each
-`type: input` value is also converted to LowerCase and it's Slug.
+RECENT UPDATES
+--------------
+Exporting the config as a module allows validation and filtering of prompts.
 
-eg : exports => exportsLowerCase
-eg : exports => exportsSlug
+More complex examples in tests. List, choice, checkbox are all exampled.
+
+Changed Handlebars to Blueimp (breaking change), allows for more
+flexibility in output.
+
+Changed prompting engine from Prompt to Inquirer (breaking change), allows
+more options for populating your templates.
 
 ROADMAP
 -------
