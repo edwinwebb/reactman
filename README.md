@@ -11,6 +11,30 @@ command line with NPM scripts.
 
 Reactman away!
 
+INSTALL AND USE
+---------------
+
+Install via NPM
+
+`npm install --save-dev reactman`
+
+Then add this line to your NPM scripts
+
+`
+"reactman" : "reactman --config path-to-config.js"
+`
+
+Make a config file from the example below. You will also need some templates.
+You can grab the example templates from ./test/templates.
+
+Then finally type at your prompt to create a new component from your templates
+
+`
+npm run reactman
+`
+
+The first prompt will ask for the key in the scripts part of the config.
+
 BASIC EXAMPLE
 -------------
 
@@ -80,30 +104,6 @@ export default class Reactman extends React.Component {
 ```
 
 You can find more complex examples in my pixi-seed project and in the tests.
-
-INSTALL AND USE
----------------
-
-Install via NPM
-
-`npm install --save-dev reactman`
-
-Then add this line to your NPM scripts
-
-`
-"reactman" : "reactman --config path-to-config.js"
-`
-
-Make a config file from the example below. You will also need some templates.
-You can grab the example templates from ./test/templates.
-
-Then finally type at your prompt to create a new component from your templates
-
-`
-npm run reactman
-`
-
-The first prompt will ask for the key in the scripts part of the config.
 
 TEMPLATES
 ------
