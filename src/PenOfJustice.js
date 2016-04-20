@@ -79,7 +79,7 @@ function writeTemplate(source, results, outputFolder, outputFile, mainCallback) 
 function makeFolder(dir, callback) {
 
   var folder = path.resolve(process.cwd(), dir);
-  var noDirErr = "Directory creation problem, check config.json outputFolder";
+  var noDirErr = "Directory creation problem for "+ dir +", check config.json outputFolder";
 
   fs.mkdir(folder, function(err) {
     if (err && err.code === "EEXIST") {
