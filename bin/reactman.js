@@ -26,7 +26,7 @@ var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
  */
 function loadConfig(callback) {
   if(!args.config) {
-    callback(new Error("Please supply a config file."));
+    callback(new Error("Please supply a --config file in your package.json."));
     return;
   }
 
@@ -50,7 +50,7 @@ function checkScripts(config, callback) {
   };
 
   if(!config.scripts) {
-    callback(new Error("Please supply a set of prompt scripts in your config."));
+    callback(new Error("Can't find \"scripts\" in the config. Aborting."));
   } else {
     baseScript.choices = Object.keys(config.scripts);
     baseScript.default = config.default_script || 0;
@@ -68,7 +68,7 @@ function checkScripts(config, callback) {
  */
 function promptBaseScript(baseScript, config, callback){
   prompt.prompt(baseScript, function (result) {
-    if(!config.scripts[result.script]) {
+    if(!config.scripts[result.script].script) {
       callback(new Error("Script " + result.script + " not found in config."));
     } else {
       callback(null, config.scripts[result.script], config);
