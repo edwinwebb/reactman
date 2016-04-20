@@ -255,6 +255,8 @@ module.exports = {
 
 RECENT UPDATES
 --------------
+Added CamelCase
+
 Exporting the config as a module allows validation and filtering of prompts.
 
 More complex examples in tests. List, choice, checkbox are all exampled.
