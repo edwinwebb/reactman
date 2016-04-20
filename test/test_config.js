@@ -21,17 +21,16 @@ module.exports = {
   "scripts" : {
     "component" : {
       "files" : {
-        "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom.jsx",
-        "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}-custom.css",
-        "template-test.js" : "tests/exports-test.custom"
+        "template.jsx" : "components/{%=o.exportsLowerCase%}/{%=o.exportsLowerCase%}.jsx",
+        "template.css" : "components/{%=o.exportsLowerCase%}/{%=o.exportsLowerCase%}.css",
+        "template-test.js" : "tests/{%=o.exportsLowerCase%}.custom"
       },
       "script" : [{
         "name": "exports",
         "message": "Exports",
         "required": true,
-        "default": "Exports",
-        "type": "input",
-        "validate" : variableName
+        "default": "Exports Test",
+        "type": "input"
       }, {
         "name": "extends",
         "message": "Extends",

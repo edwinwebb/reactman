@@ -34,6 +34,7 @@
   "dependencies": {
     "async": "^1.4.2",
     "blueimp-tmpl": "^2.5.5",
+    "camelcase": "^2.1.1",
     "chalk": "^1.1.0",
     "inquirer": "^0.10.0",
     "minimist": "^1.1.2",
