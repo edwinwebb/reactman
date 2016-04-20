@@ -165,7 +165,7 @@
 
         <h3>Adding a config</h3>
         <p>Reactman needs a config to get started and know where to look for templates and where it will write file to. It's recommended you add this config to the subdirectory mentioned in the previous step.</p>
-        <p>The most important part of this file is the "scripts" section. This holds the template locations and the <a href="https://github.com/sboudrias/uirer.js" target="_blank">Inquirer.js</a> prompt script which will be presented to the developer. In this most basic example we simple ask for the module name to be exported.</p>
+        <p>The most important part of this file is the "scripts" section. This holds the template locations and the <a href="https://github.com/sboudrias/Inquirer.js" target="_blank">Inquirer.js</a> prompt script which will be presented to the developer. In this most basic example we simple ask for the module name to be exported.</p>
         <pre>
           {
             "templatesFolder" : "./templates/",
@@ -263,9 +263,9 @@
             }
           }
         </pre>
-        <p>It's as simple as that. Reactman uses the <a href="https://github.com/sboudrias/uirer.js" target="_blank">Inquirer.js</a> package. If we export the JSON from a JS file we can add some more advanced features to <a href="https://github.com/sboudrias/uirer.js" target="_blank">Inquirer.js</a>.</p>
+        <p>It's as simple as that. Reactman uses the <a href="https://github.com/sboudrias/Inquirer.js" target="_blank">Inquirer.js</a> package. If we export the JSON from a JS file we can add some more advanced features to <a href="https://github.com/sboudrias/Inquirer.js" target="_blank">Inquirer.js</a>.</p>
         <h3>Adding validation and filters</h3>
-        <p><a href="https://github.com/sboudrias/uirer.js" target="_blank">Inquirer.js</a> enables Reactman to "validate" or "filter" inputs with the corresponding keys. Each accepts a function as exampled below. Here we see only valid variable names being allowed for module naming and transforming a comma-separated list into an array for further processing in the template. For Redux Actions it's very useful to be able to type quickly generate the constants and functions associated with this type of file.</p>
+        <p><a href="https://github.com/sboudrias/Inquirer.js" target="_blank">Inquirer.js</a> enables Reactman to "validate" or "filter" inputs with the corresponding keys. Each accepts a function as exampled below. Here we see only valid variable names being allowed for module naming and transforming a comma-separated list into an array for further processing in the template. For Redux Actions it's very useful to be able to type quickly generate the constants and functions associated with this type of file.</p>
         <pre>
 
           function variableName(i) {
@@ -318,8 +318,28 @@
             }
           }
         </pre>
-        <h3>Updating templates</h3>
-        <p></p>
+        <h3>Templates</h3>
+        <p>Reactman add three post-fixes to each string you supply to your script. There are LowerCase, Slug and CamelCase for some help with naming variables. Spaces will be replaced by underscores.</p>
+        <p>This is best illustrated by example.</p>
+        <pre>
+          This looks like a job for Reactman!
+          -----------------------------------
+          ? Choose a Script from your config: component
+          ? Exports: Exports Test
+
+          ...
+
+          {%= o.exports %}
+          {%= o.exportsSlug %}
+          {%= o.exportsLowerCase %}
+          {%= o.exportsCamelCase %}
+
+          ...
+          Exports Test
+          Exports_Test
+          exports_test
+          exportsTest
+        </pre>
         <pre>
           /*
           * action types

@@ -112,6 +112,29 @@ Template variables are defined in the `scripts` in your config file. Each
 
 eg : exports => exportsLowerCase
 eg : exports => exportsSlug
+eg : exports => exportsCamelCase
+
+in example...
+
+```
+This looks like a job for Reactman!
+-----------------------------------
+? Choose a Script from your config: component
+? Exports: Exports Test
+
+...
+
+{%= o.exports %}
+{%= o.exportsSlug %}
+{%= o.exportsLowerCase %}
+{%= o.exportsCamelCase %}
+
+...
+Exports Test
+Exports_Test
+exports_test
+exportsTest
+```
 
 CONFIG
 ------
