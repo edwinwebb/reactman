@@ -8,11 +8,6 @@
       margin:0;
       font-family:sans-serif;
       font-size: 18px;
-      /*background-image: url(./hero.jpg);
-      background-position: 0 5em;
-      background-size:contain;
-      background-repeat:no-repeat;
-      background-attachment:fixed;*/
     }
 
     header {
@@ -22,7 +17,6 @@
     header img {
       width:100%;
       margin-top:3em;
-      /*opacity:0;*/
     }
 
     header nav {
@@ -52,13 +46,7 @@
       left:1em;
     }
 
-    .content {
-      /*background:white;
-      overflow:auto;
-      box-shadow: 0 0 10px black;*/
-    }
-
-    main,aside {
+    main, aside {
       box-sizing:border-box;
       float:left;
     }
@@ -163,7 +151,7 @@
         <p>Once completed you might want to add a template or reactman folder to your codebase. Reactman is however quite agnostic.</p>
 
         <h3>Adding a config</h3>
-        <p>Reactman needs a config to get started and know where to look for templates and where it will write file to. It's recommended you add this config to the subdirectory mentioned in the previous step.</p>
+        <p>Reactman needs a config to get started and know where to look for templates and where it will write files. It's recommended you add this config to the subdirectory mentioned in the previous step.</p>
         <p>The most important part of this file is the "scripts" section. This holds the template locations and the <a href="https://github.com/sboudrias/Inquirer.js" target="_blank">Inquirer.js</a> prompt script which will be presented to the developer. In this most basic example we simple ask for the module name to be exported.</p>
         <pre>
           {
@@ -182,7 +170,7 @@
             }
           }
         </pre>
-        <p>There are a few more basic options descibed in the README.</p>
+        <p>There are a few more basic options described in the README.</p>
         <p>In advanced setups you can export the JSON and add some formatting and validation methods to your code. This is especially useful for checking variable names or code quality.</p>
 
         <h3>Running the config</h3>
