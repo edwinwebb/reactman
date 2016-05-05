@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reactman : Project Code Generation</title>
+  <style>
+    body {
+      margin:0;
+      font-family:sans-serif;
+      font-size: 18px;
+    }
+
+    header {
+      position:relative;
+    }
+
+    header img {
+      width:100%;
+      margin-top:3em;
+    }
+
+    header nav {
+      height:3em;
+      padding:1em 1em 1em 20em;
+      background:#111;
+      position:absolute;
+      right:0em;
+      width:100%;
+      text-align:right;
+    }
+
+    header nav a {
+      color:white;
+      padding:1em;
+      line-height:4em;
+      text-transform:uppercase;
+      text-decoration:none;
+      font-size:.8em;
+    }
+
+    header h1 {
+      position:absolute;
+      top:0;
+      color:white;
+      z-index:2;
+      left:1em;
+    }
+
+    main, aside {
+      box-sizing:border-box;
+      float:left;
+    }
+
+    main {
+      width:70%;
+      padding:3em;
+    }
+
+    aside {
+      width:30%;
+      margin-top:-66px;
+      z-index:3;
+      position:relative;
+      padding-right:1em;
+    }
+
+    aside pre {
+      word-break:break-all;
+      overflow:scroll;
+    }
+
+    .circle {
+      border-radius:50%;
+      background:white;
+      width:100px;
+      height:100px;
+      padding:10px;
+      box-shadow:1px 1px 10px black;
+      margin-left:50%;
+      position:relative;
+      left:50%;
+      margin-left:-55px;
+    }
+
+    .circle img {
+      width:70px;
+      margin:10px 15px;
+    }
+
+    section p {
+      width:66%;
+    }
+
+    p {
+      font-size: 1em; /* 18px */
+      line-height: 1.5em; /* 27px */
+      margin: 1.5em 0 0 0;
+    }
+
+    h2 {
+      font-size: 2.0em;
+      line-height: 1.5em;
+      margin-top: 0.7500em;
+      margin-bottom: 0.0em;
+    }
+
+    h3 {
+      font-size: 1.3333em;
+      line-height: 1.1250em;
+      margin-top: 1.1250em;
+      margin-bottom: 0em;
+    }
+
+    pre {
+      background-color:#eee;
+      padding:1em;
+      border-radius:.5em;
+      font-size:.8em;
+      margin: 1.5em 0 0 0;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>REACTMAN</h1>
+    <nav>
+      <li>
+        <a href="#start">Getting started</a>
+        <a href="#advanced">Advanced</a>
+        <a href="https://github.com/edwinwebb/reactman-examples">Examples</a>
+        <a href="https://github.com/edwinwebb/reactman">Github</a>
+      </li>
+    </nav>
+    <img src="./hero.jpg" alt="heroic code generation"/>
+  </header>
+  <div class="content">
+
+    <main>
+      <section>
+        <h2>What is Reactman?</h2>
+        <p>Reactman helps you quickly author new sets of files to your codebase, from your codebase.</p>
+        <p>Reactman is added to your NPM development dependancies and is initiated with NPM scripts. Reactman will prompt the developer to populate a set of templates which are added to your codebase. He's here to help the lone gun or dedicated team.</p>
+        <p>We believe that front end development is becoming more complex across much larger and fragmented codebases. Reactman helps codebases keep consistent code-styles, tests and documentation. Reactman can be configured for any Node.js based project and is designed to be a part of agile workflows.</p>
+      </section>
+      <section id="start">
+        <h2>Getting set up</h2>
+        <h3>Install</h3>
+        <p>Start by installing Reactman as a development dependancy. Reactman config is local your project and no global dependancies are required. Just type and go.</p>
+        <pre>npm install reactman --save-dev</pre>
+        <p>Once completed you might want to add a template or reactman folder to your codebase. Reactman is however quite agnostic.</p>
+
+        <h3>Adding a config</h3>
+        <p>Reactman needs a config to get started and know where to look for templates and where it will write files. It's recommended you add this config to the subdirectory mentioned in the previous step.</p>
+        <p>The most important part of this file is the "scripts" section. This holds the template locations and the <a href="https://github.com/sboudrias/Inquirer.js" target="_blank">Inquirer.js</a> prompt script which will be presented to the developer. In this most basic example we simple ask for the module name to be exported.</p>
+        <pre>
+          {
+            "templatesFolder" : "./templates/",
+            "outputFolder" : "./src/",
+            "scripts" : {
+              "component" : {
+                "files" : {
+                  "example.jsx" : "components/{%=o.exports%}.jsx"
+                },
+                "script" : [{
+                  "name": "exports",
+                  "message": "Exports"
+                }]
+              }
+            }
+          }
+        </pre>
+        <p>There are a few more basic options described in the README.</p>
+        <p>In advanced setups you can export the JSON and add some formatting and validation methods to your code. This is especially useful for checking variable names or code quality.</p>
+
+        <h3>Running the config</h3>
+        <p>To run the config you'll need to add a NPM script to your package.json file. This allows multiple configs for more expansive projects.</p>
+        <pre>
+          "scripts" : {"reactman": "reactman --config ./templates/my-config.json"}
+        </pre>
+
+        <h3>Adding the template</h3>
+        <p>Of course none of this work without a <a href="https://github.com/blueimp/JavaScript-Templates" target="_blank">BlueImp Javascript template</a>. Here's the example from the readme, it most cases it's authoured by the lead developer and maintained by the team.</p>
+        <pre>
+          import React from "react";
+
+          /**
+          * A new react components
+          *
+          * @exports {%=o.exports%}
+          * @extends React.Component
+          */
+          export default class {%=o.exports%} extends React.Component {
+            /**
+            * @return {ReactElement} {%=o.exports%}
+            */
+            render() {
+              return(&lt;div&gt;{%=o.exports%}&lt;/div&gt;)
+            }
+          }
+        </pre>
+
+        <h3>Reactman, away!</h3>
+        <pre>npm run reactman</pre>
+        <p>Select 'component' and type a name and the file is generated.</p>
+        <pre>
+          /**
+          * A new react components
+          *
+          * @exports test
+          * @extends React.Component
+          */
+          export default class test extends React.Component {
+            /**
+            * @return {ReactElement} test
+            */
+            render() {
+              return(&lt;div&gt;test&lt;/div&gt;)
+            }
+          }
+        </pre>
+      </section>
+      <section id="advanced">
+        <h2>Next steps</h2>
+        <p>Adding more scripts to the Reactman config is as easy as writing a new template and then matching the prompts. Let's take a look.</p>
+        <pre>
+          {
+            "templatesFolder" : "./templates/",
+            "outputFolder" : "./src/",
+            "default_script" : "action",
+            "scripts" : {
+              "action" : {
+                "files" : {
+                  "action.js" : "actions/{%=o.exports%}.jsx"
+                },
+                "script" : [{
+                  "name": "exports",
+                  "message": "Exports"
+                }]
+              },
+              "component" : {
+                "files" : {
+                  "example.jsx" : "components/{%=o.exports%}.jsx"
+                },
+                "script" : [{
+                  "name": "exports",
+                  "message": "Exports"
+                }]
+              }
+            }
+          }
+        </pre>
+        <p>It's as simple as that. Reactman uses the <a href="https://github.com/sboudrias/Inquirer.js" target="_blank">Inquirer.js</a> package. If we export the JSON from a JS file we can add some more advanced features to <a href="https://github.com/sboudrias/Inquirer.js" target="_blank">Inquirer.js</a>.</p>
+        <h3>Adding validation and filters</h3>
+        <p><a href="https://github.com/sboudrias/Inquirer.js" target="_blank">Inquirer.js</a> enables Reactman to "validate" or "filter" inputs with the corresponding keys. Each accepts a function as exampled below. Here we see only valid variable names being allowed for module naming and transforming a comma-separated list into an array for further processing in the template. For Redux Actions it's very useful to be able to type quickly generate the constants and functions associated with this type of file.</p>
+        <pre>
+
+          function variableName(i) {
+            var exp = /^[a-zA-Z][a-zA-Z0-9]*?$/;
+            var pass = exp.test(i);
+
+            if(pass) {
+              return true;
+            } else {
+              return "Invalid variable name, please try again...";
+            }
+          }
+
+          module.exports = {
+            "templatesFolder" : "./templates/",
+            "outputFolder" : "./src/",
+            "default_script" : "action",
+            "scripts" : {
+              "action" : {
+                "files" : {
+                  "action.js" : "actions/{%=o.exports%}.jsx"
+                },
+                "script" : [{
+                  "name": "exports",
+                  "message": "Exports",
+                  "required": true,
+                  "default": "NewComponent",
+                  "type": "input",
+                  "validate" : variableName
+                },{
+                  "name": "actions",
+                  "message": "Add functions",
+                  "required": false,
+                  "default": "",
+                  "type": "input",
+                  "filter" : function(i) {
+                    return i.replace(" ","").split(",");
+                  }
+                }]
+              },
+              "component" : {
+                "files" : {
+                  "example.jsx" : "components/{%=o.exports%}.jsx"
+                },
+                "script" : [{
+                  "name": "exports",
+                  "message": "Exports"
+                }]
+              }
+            }
+          }
+        </pre>
+        <h3>Templates</h3>
+        <p>Reactman add three post-fixes to each string you supply to your script. There are LowerCase, Slug and CamelCase for some help with naming variables. Spaces will be replaced by underscores.</p>
+        <p>This is best illustrated by example.</p>
+        <pre>
+          This looks like a job for Reactman!
+          -----------------------------------
+          ? Choose a Script from your config: component
+          ? Exports: Exports Test
+
+          ...
+
+          {%= o.exports %}
+          {%= o.exportsSlug %}
+          {%= o.exportsLowerCase %}
+          {%= o.exportsCamelCase %}
+
+          ...
+          Exports Test
+          Exports_Test
+          exports_test
+          exportsTest
+        </pre>
+        <p>Let's look at these in a real world example combined with some Javascript loops and string methods. We are creating a file with a set of constants and placeholder functions.</p>
+        <pre>
+          /*
+          * action types
+          */
+          {% for(var i = 0; i < o.actions.length; i++) { %}
+          export const {%= o.actions[i].toUpperCase() %} = '{%= o.actions[i].toUpperCase() %}';
+          {% } %}
+          /*
+          * action creators
+          */
+          {% for(var i = 0; i < o.actions.length; i++) { %}
+          export function {%= o.actions[i] %}(input) {
+            return { type: {%= o.actions[i].toUpperCase() %}, input }
+          }
+          {% } %}
+        </pre>
+        <p>Will result in a file similar to...</p>
+        <pre>
+          /*
+          * action types
+          */
+          export const ADD = 'ADD';
+          export const REMOVE = 'REMOVE';
+          export const CLEAR = 'CLEAR';
+
+          /*
+          * action creators
+          */
+          export function add(input) {
+            return { type: ADD, input }
+          }
+
+          export function remove(input) {
+            return { type: REMOVE, input }
+          }
+
+          export function clear(input) {
+            return { type:  CLEAR, input }
+          }
+        </pre>
+        <p>Once Reactman has been set up it just takes a few keystrokes to add a well structured file ready for your work. This is Reactman's Power.</p>
+        <p>If you're still looking for more, please see the <a href="https://github.com/edwinwebb/reactman-examples">examples</a>.</p>
+      </section>
+      <section>
+        <h2>Contribute</h2>
+        <p>Reactman is a young buck who has more training to complete. Can the community support his near-heroic efforts?</p>
+        <p>His mission is to improve developer productivity and have codebases be clean and maintainable. Reactman wants you!</p>
+      </section>
+    </main>
+    <aside>
+      <div class="circle">
+        <img src="./reactman-logo.svg" alt="Reactman">
+      </div>
+      <p>Install</p>
+<pre>
+npm install reactman --save-dev
+</pre>
+      <p>NPM script</p>
+<pre>
+{"reactman": "reactman --config ./config.json"}
+</pre>
+      <p>config.json</p>
+      <pre>
+{
+  "templatesFolder" : "./templates/",
+  "outputFolder" : "./src/",
+  "scripts" : {
+    "component" : {
+      "files" : {
+        "template.js" : "components/{%=o.exportsLowerCase%}/{%=o.exports%}.js"
+      },
+      "script" : [{
+        "name": "exports",
+        "message": "Exports"
+      }]
+    }
+  }
+}
+</pre>
+      <p>template.js</p>
+      <pre>
+/**
+* @exports {%=o.exports%}
+*/
+export default class {%=o.exports%} {
+
+}</pre>
+    </aside>
+  </div>
+</body>
+</html>

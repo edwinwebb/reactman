@@ -20,15 +20,15 @@ describe('Tests Run', function () {
 describe('Reactman', function() {
   describe('He should output three files', function () {
     it('JSX', function () {
-      var file = fs.readFileSync(path.resolve(__dirname,'./output/components/exports/Exports-custom.jsx'));
+      var file = fs.readFileSync(path.resolve(__dirname,'./output/components/exports_test/exports_test.jsx'));
       assert.equal(true, file.length > 0);
     });
     it('CSS', function () {
-      var file = fs.readFileSync(path.resolve(__dirname,'./output/components/exports/Exports-custom.css'));
+      var file = fs.readFileSync(path.resolve(__dirname,'./output/components/exports_test/exports_test.css'));
       assert.equal(true, file.length > 0);
     });
     it('Test', function () {
-      var file = fs.readFileSync(path.resolve(__dirname,'./output/tests/exports-test.custom'));
+      var file = fs.readFileSync(path.resolve(__dirname,'./output/tests/exports_test.custom'));
       assert.equal(true, file.length > 0);
     });
   });

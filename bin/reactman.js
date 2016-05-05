@@ -9,6 +9,7 @@ var path = require("path");
 var minimist = require("minimist");
 var prompt = require("inquirer");
 var slug = require("slug");
+var camelcase = require("camelcase");
 var async = require("async");
 var VoiceOfTruth = require("../src/VoiceOfTruth");
 var PenOfJustice = require("../src/PenOfJustice");
@@ -26,7 +27,7 @@ var fileFolderExp = new RegExp("^(.*/)([^/]*)$");
  */
 function loadConfig(callback) {
   if(!args.config) {
-    callback(new Error("Please supply a config file."));
+    callback(new Error("Please supply a --config file in your package.json."));
     return;
   }
 
@@ -50,7 +51,7 @@ function checkScripts(config, callback) {
   };
 
   if(!config.scripts) {
-    callback(new Error("Please supply a set of prompt scripts in your config."));
+    callback(new Error("Can't find \"scripts\" in the config. Aborting."));
   } else {
     baseScript.choices = Object.keys(config.scripts);
     baseScript.default = config.default_script || 0;
@@ -68,8 +69,8 @@ function checkScripts(config, callback) {
  */
 function promptBaseScript(baseScript, config, callback){
   prompt.prompt(baseScript, function (result) {
-    if(!config.scripts[result.script]) {
-      callback(new Error("Script " + result.script + " not found in config."));
+    if(!config.scripts[result.script].script) {
+      callback(new Error("Script for '" + result.script + "' not found in config."));
     } else {
       callback(null, config.scripts[result.script], config);
     }
@@ -93,8 +94,9 @@ function runChosenScript(chosenScript, config, callback) {
     // loop results and make each value lowerCase and slug
     for(var res in result) {
       if (result.hasOwnProperty(res) && typeof result[res] === "string") {
-        result[res + "LowerCase"] = result[res].toLowerCase();
-        result[res + "Slug"] = slug(result[res]);
+        result[res + "LowerCase"] = slug(result[res].toLowerCase(), "_");
+        result[res + "Slug"] = slug(result[res], "_");
+        result[res + "CamelCase"] = camelcase(result[res]);
       }
     }
 
@@ -182,6 +184,6 @@ async.waterfall(tasks, function done(err) {
   } else {
     VoiceOfTruth.warn(err.message);
     VoiceOfTruth.log(err.stack);
-    VoiceOfTruth.error("Errors: R.I.P Reactman");
+    VoiceOfTruth.error("R.I.P Reactman");
   }
 });

@@ -39,12 +39,16 @@ function writeTemplate(source, results, outputFolder, outputFile, mainCallback) 
   async.waterfall([
     function readFile(callback) {
       fs.readFile(input, function(err, data){
-        // make the buffer into a string
-        var fileString = data.toString();
-        // call the render function
-        var content = renderToString(fileString, results);
+        var fileString;
+        var content;
 
         VoiceOfTruth.log("Read: " + input);
+
+        // make the buffer into a string
+        fileString = data.toString();
+
+        // call the render function
+        content = renderToString(fileString, results);
 
         callback(err, content);
       });
@@ -75,11 +79,11 @@ function writeTemplate(source, results, outputFolder, outputFile, mainCallback) 
 function makeFolder(dir, callback) {
 
   var folder = path.resolve(process.cwd(), dir);
-  var noDirErr = "Directory creation problem, check config.json outputFolder";
+  var noDirErr = "Directory creation problem for " + dir + ", check config.json outputFolder";
 
   fs.mkdir(folder, function(err) {
     if (err && err.code === "EEXIST") {
-      VoiceOfTruth.warn(dir + " already exists");
+      VoiceOfTruth.log(dir + " already exists");
       callback(null, true);
     } else if(err) {
       VoiceOfTruth.error(noDirErr);

@@ -11,29 +11,31 @@ command line with NPM scripts.
 
 Reactman away!
 
-BREAKING CHANGES in V3
-----------------------
-Reactman has upgraded his trusty tools to bring the community more power to
-control both input and output. Reactman's mission is to prove to the world that
-he has what it takes to get the job done.
+INSTALL AND USE
+---------------
 
-* V3 has updated to the Inquirer engine. In your config, change all `description`
-keys to `message` and `string` to `input`
+Install via NPM
 
-* V3 had updated the templating engine to Blueimp Templates, the template
-delimiters are now `{%=` and `%}` and logicfull.
+`npm install --save-dev reactman`
 
-RECENT UPDATES
---------------
-Exporting the config as a module allows validation and filtering of prompts.
+Then add this line to your NPM scripts
 
-More complex examples in tests. List, choice, checkbox are all exampled.
+`
+"reactman" : "reactman --config path-to-config.js"
+`
 
-Changed Handlebars to Blueimp (breaking change), allows for more
-flexibility in output.
+Make a config file from the example below or from . You will also need some templates.
+You can grab the example templates from ./test/templates.
 
-Changed prompting engine from Prompt to Inquirer (breaking change), allows
-more options for populating your templates.
+Then finally type at your prompt to create a new component from your templates
+
+`
+npm run reactman
+`
+
+The first prompt will ask for the key in the scripts part of the config.
+
+There are more examples in the [reactman-examples](https://github.com/edwinwebb/reactman-examples) repository.
 
 BASIC EXAMPLE
 -------------
@@ -105,29 +107,36 @@ export default class Reactman extends React.Component {
 
 You can find more complex examples in my pixi-seed project and in the tests.
 
-INSTALL AND USE
----------------
+TEMPLATES
+------
+Template variables are defined in the `scripts` in your config file. Each
+`type: input` value is also converted to LowerCase and it's Slug.
 
-Install via NPM
+eg : exports => exportsLowerCase
+eg : exports => exportsSlug
+eg : exports => exportsCamelCase
 
-`npm install --save-dev reactman`
+in example...
 
-Then add this line to your NPM scripts
+```
+This looks like a job for Reactman!
+-----------------------------------
+? Choose a Script from your config: component
+? Exports: Exports Test
 
-`
-"reactman" : "reactman --config path-to-config.js"
-`
+...
 
-Make a config file from the example below. You will also need some templates.
-You can grab the example templates from ./test/templates.
+{%= o.exports %}
+{%= o.exportsSlug %}
+{%= o.exportsLowerCase %}
+{%= o.exportsCamelCase %}
 
-Then finally type at your prompt to create a new component from your templates
-
-`
-npm run reactman
-`
-
-The first prompt will ask for the key in the scripts part of the config.
+...
+Exports Test
+Exports_Test
+exports_test
+exportsTest
+```
 
 CONFIG
 ------
@@ -246,13 +255,19 @@ module.exports = {
 
 ```
 
-TEMPLATES
-------
-Template variables are defined in the `scripts` in your config file. Each
-`type: input` value is also converted to LowerCase and it's Slug.
+RECENT UPDATES
+--------------
+Added CamelCase
 
-eg : exports => exportsLowerCase
-eg : exports => exportsSlug
+Exporting the config as a module allows validation and filtering of prompts.
+
+More complex examples in tests. List, choice, checkbox are all exampled.
+
+Changed Handlebars to Blueimp (breaking change), allows for more
+flexibility in output.
+
+Changed prompting engine from Prompt to Inquirer (breaking change), allows
+more options for populating your templates.
 
 ROADMAP
 -------
@@ -262,8 +277,9 @@ ROADMAP
 * [DONE] Better testing, break out code to modules
 * [In Progress] General improvements to scripts and configs, more control of input & output
 * Better workflows and examples, eg state commits, update issue trackers
-* Cute website & logo
-* Repository of templates and scripts
+* [In Progress] Cute website & logo
+* [In Progress] Repository of templates and scripts
+* User feedback improvements
 
 CONTRIBUTING
 ------------
