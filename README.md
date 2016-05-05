@@ -24,7 +24,7 @@ Then add this line to your NPM scripts
 "reactman" : "reactman --config path-to-config.js"
 `
 
-Make a config file from the example below. You will also need some templates.
+Make a config file from the example below or from . You will also need some templates.
 You can grab the example templates from ./test/templates.
 
 Then finally type at your prompt to create a new component from your templates
@@ -34,6 +34,8 @@ npm run reactman
 `
 
 The first prompt will ask for the key in the scripts part of the config.
+
+There are more examples in the [reactman-examples](https://github.com/edwinwebb/reactman-examples) repository.
 
 BASIC EXAMPLE
 -------------
@@ -275,8 +277,9 @@ ROADMAP
 * [DONE] Better testing, break out code to modules
 * [In Progress] General improvements to scripts and configs, more control of input & output
 * Better workflows and examples, eg state commits, update issue trackers
-* Cute website & logo
-* Repository of templates and scripts
+* [In Progress] Cute website & logo
+* [In Progress] Repository of templates and scripts
+* User feedback improvements
 
 CONTRIBUTING
 ------------
