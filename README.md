@@ -16,7 +16,7 @@ INSTALL AND USE
 
 Install via NPM
 
-`npm install --save-dev reactman`
+`npm install -g reactman`
 
 Then add this line to your NPM scripts
 
