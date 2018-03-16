@@ -14,7 +14,7 @@ Reactman away!
 INSTALL AND USE
 ---------------
 
-Install via NPM
+Install via NPM/Yarn/etc
 
 `npm install reactman`
 
@@ -24,7 +24,7 @@ Then add this line to your NPM scripts
 "reactman" : "reactman --config path-to-config.js"
 `
 
-Make a config file from the example below or from . You will also need some templates.
+Make a config file from the example below or from the examples. You will also need some templates.
 You can grab the example templates from ./test/templates.
 
 Then finally type at your prompt to create a new component from your templates
